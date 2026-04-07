@@ -1,0 +1,76 @@
+<!-- CONTACT HERO -->
+<section class="w-full h-[630px] relative flex items-center justify-center">
+
+    <!-- BACKGROUND IMAGE -->
+    <img src="/images/contactbanner.jpg"
+        class="w-full h-full object-cover absolute" alt="">
+
+    <!-- OVERLAY -->
+    <div class="absolute inset-0 bg-black/30"></div>
+
+    <!-- TEXT TENGAH -->
+    <h1 class="relative text-white text-4xl md:text-5xl font-semibold tracking-widest">
+        CONTACT
+    </h1>
+
+</section>
+
+
+<!-- CONTACT CONTENT -->
+<section class="w-full min-h-[1000px] bg-gray-200 flex items-center justify-center py-20 px-10">
+
+    <div class="max-w-6xl w-full grid md:grid-cols-2 gap-10">
+
+        <!-- LEFT SIDE -->
+        <div>
+
+            <h3 class="text-lg mb-6">Get in Touch</h3>
+
+            <div class="space-y-6 text-sm">
+
+                <div>
+                    <p class="font-semibold">Phone</p>
+                    <p class="text-yellow-600">08980563855</p>
+                </div>
+
+                <div>
+                    <p class="font-semibold">Phone</p>
+                    <p class="text-yellow-600">08980563855</p>
+                </div>
+
+                <div>
+                    <p class="font-semibold">Whatsapp</p>
+                    <p class="text-yellow-600">08980563855</p>
+                </div>
+
+                <div>
+                    <p class="font-semibold">Address</p>
+                    <p class="text-gray-600">
+                        Jl. Astasura No.1 
+                    </p>
+                </div>
+
+                <div>
+                    <p class="font-semibold">Email</p>
+                    <p class="text-yellow-600">reservation@ogagresort.com</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- (MAP) -->
+        <div class="w-full h-[500px] md:h-full">
+
+            <<iframe 
+            src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d246.5518975295231!2d115.21320046968638!3d-8.61228011398708!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sastasura%20no.1!5e0!3m2!1sid!2sid!4v1775530660292!5m2!1sid!2sid"
+            class="w-full h-full border-0 rounded"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+
+        </div>
+
+    </div>
+
+</section>
