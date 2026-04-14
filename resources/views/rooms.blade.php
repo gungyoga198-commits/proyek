@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'OGAG')
+@section('title', 'Rooms - OGAG Hotel')
 
 @section('content')
-
-    <x-hero />
-
+    <x-rooms />
 @endsection
