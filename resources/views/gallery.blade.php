@@ -3,5 +3,7 @@
 @section('title', 'Gallery - OGAG Hotel')
 
 @section('content')
-    @include('components.gallery')
+
+    <x-gallery />
+    
 @endsection

@@ -1,7 +1,7 @@
 <!-- GALLERY PAGE -->
 
 <!-- HERO BANNER -->
-<section class="relative h-72 flex items-center justify-center overflow-hidden mt-20">
+<section class="relative h-72 flex items-center justify-center overflow-hidden">
     <img src="/images/gallery2.webp" class="absolute inset-0 w-full h-full object-cover" alt="Gallery Banner">
     <div class="absolute inset-0 bg-black/60 pointer-events-none"></div>
     <div class="relative text-center text-white z-10">

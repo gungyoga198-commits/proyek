@@ -1,5 +1,5 @@
 <!--NAVBAR -->
-<header class="fixed top-0 w-full z-50">
+<header class="absolute top-0 w-full z-20">
     <nav class="flex justify-between items-center px-16 py-5">
         <a href="{{ route('home') }}">
             <img src="/images/LogoHotel.png" alt="logo" class="h-10">

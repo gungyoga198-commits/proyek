@@ -1,10 +1,13 @@
 <!-- CONTACT HERO -->
-<section class="w-full h-[630px] relative flex items-center justify-center">
-    <img src="/images/contactbanner.jpg" class="w-full h-full object-cover absolute" alt="">
-    <div class="absolute inset-0 bg-black/30 pointer-events-none"></div>
-    <h1 class="relative text-white text-4xl md:text-5xl font-semibold tracking-widest">
-        CONTACT
-    </h1>
+<section class="relative h-72 flex items-center justify-center overflow-hidden">
+    <img src="/images/contact.jpg" class="absolute inset-0 w-full h-full object-cover" alt="Gallery Banner">
+    <div class="absolute inset-0 bg-black/60 pointer-events-none"></div>
+    <div class="relative text-center text-white z-10">
+        <p class="tracking-widest text-xs text-yellow-400 mb-3 uppercase"></p>
+        <h1 class="text-5xl font-semibold tracking-widest">CONTACT</h1>
+        <div class="mt-4 w-16 h-0.5 bg-yellow-500 mx-auto"></div>
+        <p class="mt-4 text-gray-300 text-sm">SIAP MEMBANTU KALAU ADA KENDALA/p>
+    </div>
 </section>
 
 <!-- CONTACT CONTENT -->
