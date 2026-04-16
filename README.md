@@ -143,3 +143,12 @@ WELCOME TO CHAOS.
 ---
 
 ![chaos](https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif)
+---
+
+<p align="center">
+  <img src="https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif" width="500">
+</p>
+
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?color=39FF14&center=true&vCenter=true&lines=SYSTEM+FAILED...;WELCOME+TO+CHAOS;NO+ESCAPE" />
+</p>
