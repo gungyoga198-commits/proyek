@@ -108,7 +108,6 @@ DB_PASSWORD=
 /public/assets/img/dashboard.png
 ```
 
-*(Tambahkan screenshot asli di sini biar makin valid)*
 
 ---
 
