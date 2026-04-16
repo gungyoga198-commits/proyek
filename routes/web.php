@@ -20,10 +20,14 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
-Route::get('/admin/login', [LoginController::class, 'index']);
+Route::get('/admin/anjay13', [LoginController::class, 'index']);
 Route::post('/admin/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 })->middleware('auth');
+
+Route::get('/booking', function () {
+    return view('booking');
+})->name('booking');

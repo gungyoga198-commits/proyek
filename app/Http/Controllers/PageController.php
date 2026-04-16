@@ -15,5 +15,10 @@ class PageController extends Controller
     {
         return view('contact');
     }
+
+    public function booking()
+    {
+        return view('booking');
+    }
     
 }

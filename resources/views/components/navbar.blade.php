@@ -36,9 +36,10 @@
             </li>
 
             <li>
-                <button class="bg-yellow-600 text-white px-5 py-2 hover:bg-yellow-700 transition">
+                <a href="{{ route('booking') }}"
+                    class="bg-yellow-600 text-white px-5 py-2 hover:bg-yellow-700 transition">
                     BOOK NOW
-                </button>
+                </a>
             </li>
         </ul>
     </nav>
