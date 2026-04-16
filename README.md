@@ -137,12 +137,10 @@ kita belajar cara menghancurkan sistem dengan benar.
 > user detected...
 > decision: let them in.
 
-WELCOME TO CHAOS.
+SING MAIN MAIN DARI AJIK PEGUYANGAN
 ```
 
 ---
-
-![chaos](https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif)
 ---
 
 <p align="center">
