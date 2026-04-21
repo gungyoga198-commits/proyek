@@ -14,7 +14,7 @@
         <div class="w-1/2 h-full bg-white flex items-center justify-center px-16">
             <div class="max-w-md">
                 <p class="tracking-widest text-gray-500 mb-2">OGAG</p>
-                <h1 class="text-4xl mb-4">HOTEL</h1>
+                <h1 class="text-4xl mb-4">VILLA</h1>
                 <p class="text-gray-600 leading-relaxed">
                     Nikmati masa menginap Anda di resor kami. Kami menciptakan perjalanan yang benar-benar memuaskan dan bermakna dengan tim yang bersemangat untuk pengalaman dan kenyamanan Anda.
                 </p>

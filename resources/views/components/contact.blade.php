@@ -1,18 +1,25 @@
 <!-- CONTACT HERO -->
 <section class="relative h-72 flex items-center justify-center overflow-hidden">
-    <img src="/images/contact.jpg" class="absolute inset-0 w-full h-full object-cover" alt="Gallery Banner">
+    <img src="/images/contact.jpg" class="absolute inset-0 w-full h-full object-cover" alt="Contact Banner">
     <div class="absolute inset-0 bg-black/60 pointer-events-none"></div>
     <div class="relative text-center text-white z-10">
-        <p class="tracking-widest text-xs text-yellow-400 mb-3 uppercase"></p>
+        <p class="tracking-widest text-xs text-yellow-400 mb-3 uppercase">Hubungi Kami</p>
         <h1 class="text-5xl font-semibold tracking-widest">CONTACT</h1>
         <div class="mt-4 w-16 h-0.5 bg-yellow-500 mx-auto"></div>
-        <p class="mt-4 text-gray-300 text-sm">SIAP MEMBANTU KALAU ADA KENDALA/p>
+        <p class="mt-4 text-gray-300 text-sm">Siap membantu kalau ada kendala</p>
     </div>
 </section>
 
+<!-- BREADCRUMB -->
+<div class="px-8 py-4 text-sm text-gray-500">
+    <a href="/" class="hover:text-yellow-500 transition">Home</a>
+    <span class="mx-2">/</span>
+    <span class="text-yellow-500 font-medium">Contact</span>
+</div>
+
 <!-- CONTACT CONTENT -->
-<section class="w-full min-h-[1000px] bg-white-200 flex items-center justify-center py-20 px-10">
-    <div class="max-w-6xl w-full">
+<section class="w-full bg-white py-16 px-10">
+    <div class="max-w-6xl w-full mx-auto">
 
         <h3 class="text-3xl md:text-4xl font-semibold text-yellow-600 text-center mb-16">
             Get in Touch

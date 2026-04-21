@@ -1,15 +1,16 @@
 @extends('layouts.app')
 
-@section('title', 'Booking')
+@section('title', 'Formulir Reservasi')
 
 @section('content')
 
-    <x-booking
-        :rooms="$rooms"
-        :selected="$selected"
+    <x-reservation
+        :room="$room"
         :checkin="$checkin"
         :checkout="$checkout"
         :guests="$guests"
+        :nights="$nights"
+        :total-harga="$totalHarga"
     />
 
 @endsection

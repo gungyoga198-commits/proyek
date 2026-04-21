@@ -19,16 +19,19 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect('/admin/dashboard');
+            $request->session()->regenerate();
+            return redirect()->route('admin.dashboard');
         }
 
         return back()->with('error', 'Email atau password salah');
     }
 
     // LOGOUT
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
-        return redirect('/admin/logins');
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/admin/anjay13');
     }
 }

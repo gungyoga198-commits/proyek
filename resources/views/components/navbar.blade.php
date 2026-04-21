@@ -5,7 +5,7 @@
             <img src="/images/LogoHotel.png" alt="logo" class="h-10">
         </a>
 
-        <ul class="flex gap-8 items-center {{ request()->is('contact') || request()->is('rooms') || request()->is('gallery') ? 'text-white' : 'text-black' }}">
+        <ul class="flex gap-8 items-center {{ request()->is('contact') || request()->is('rooms') || request()->is('gallery') || request()->is('cek-reservasi') || request()->is('booking') || request()->is('reservation') || request()->is('booking/success/*') ? 'text-white' : 'text-black' }}">
 
             <li>
                 <a href="{{ route('home') }}"
@@ -32,6 +32,13 @@
                 <a href="{{ route('contact') }}"
                    class="hover:text-yellow-600 transition {{ request()->routeIs('contact') ? 'text-yellow-600 font-semibold' : '' }}">
                     Contact
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('reservasi.cek.form') }}"
+                   class="hover:text-yellow-600 transition {{ request()->routeIs('reservasi.cek*') ? 'text-yellow-600 font-semibold' : '' }}">
+                    Cek Reservasi
                 </a>
             </li>
 
