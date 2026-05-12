@@ -1,9 +1,9 @@
-<footer class="bg-gray-200 py-16 px-10">
-    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 text-center">
+<footer class="bg-gray-200 py-5 px-5">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-5 text-center">
 
         <!-- LEFT -->
         <div class="flex flex-col items-center">
-            <img src="/images/LogoHotel.png" class="h-20 mb-6">
+            <img src="/images/LogoHotel.png" class="h-24 mb-6">
 
             <p class="text-sm text-gray-700 leading-relaxed max-w-md">
                 Experience the ultimate convenience at our centrally situated Legian hotel,

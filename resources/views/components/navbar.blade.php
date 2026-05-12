@@ -1,11 +1,12 @@
 <!--NAVBAR -->
 <header class="absolute top-0 w-full z-20">
-    <nav class="flex justify-between items-center px-16 py-5">
-        <a href="{{ route('home') }}">
-            <img src="/images/LogoHotel.png" alt="logo" class="h-10">
+    <nav class="flex justify-between items-center px-16 h-20">
+
+        <a href="{{ route('home') }}" class="flex items-center">
+            <img src="/images/LogoHotel.png" alt="logo" class="h-24 w-auto object-contain">
         </a>
 
-        <ul class="flex gap-8 items-center {{ request()->is('contact') || request()->is('rooms') || request()->is('gallery') || request()->is('cek-reservasi') || request()->is('booking') || request()->is('reservation') || request()->is('booking/success/*') ? 'text-white' : 'text-black' }}">
+        <ul class="flex gap-8 items-center {{ request()->is('contact') || request()->is('rooms') || request()->is('gallery') || request()->is('cek-reservasi') || request()->is('booking') || request()->is('reservation') || request()->is('booking/success/*') || request()->is('room/*') ? 'text-white' : 'text-black' }}">
 
             <li>
                 <a href="{{ route('home') }}"

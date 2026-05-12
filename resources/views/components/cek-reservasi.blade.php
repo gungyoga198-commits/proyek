@@ -1,24 +1,17 @@
 {{-- CEK RESERVASI - CLIENT --}}
 <main>
 
-    {{-- HERO BANNER --}}
-    <section class="relative h-72 flex items-center justify-center overflow-hidden">
-        <img src="/images/OGAG.jpg" class="absolute inset-0 w-full h-full object-cover" alt="Cek Reservasi">
-        <div class="absolute inset-0 bg-black/55"></div>
-        <div class="relative text-center text-white z-10">
-            <p class="tracking-widest text-sm text-yellow-400 mb-2">STATUS PEMESANAN</p>
-            <h1 class="text-4xl font-semibold">CEK RESERVASI</h1>
-            <div class="mt-4 w-16 h-0.5 bg-yellow-500 mx-auto"></div>
-            <p class="mt-4 text-gray-300 text-sm">Masukkan kode booking atau email untuk melihat status reservasi Anda</p>
-        </div>
-    </section>
 
-    {{-- BREADCRUMB --}}
-    <div class="bg-white px-16 py-4 border-b text-sm text-gray-500">
-        <a href="{{ route('home') }}" class="hover:text-yellow-600 transition">Home</a>
-        <span class="mx-2">/</span>
-        <span class="text-yellow-600 font-medium">Cek Reservasi</span>
-    </div>
+    <x-page-banner
+        image="/images/OGAG.jpg"
+        eyebrow="STATUS PEMESANAN"
+        title="CEK RESERVASI"
+        subtitle="Masukkan kode booking atau email untuk melihat status reservasi Anda"
+    />
+
+    <x-breadcrumb :links="[
+        ['label' => 'Cek Reservasi'],
+    ]" />
 
     <section class="bg-gray-50 py-16 px-6">
         <div class="max-w-xl mx-auto">

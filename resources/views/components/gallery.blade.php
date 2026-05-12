@@ -1,23 +1,17 @@
 <!-- GALLERY PAGE -->
 
 <!-- HERO BANNER -->
-<section class="relative h-72 flex items-center justify-center overflow-hidden">
-    <img src="/images/gallery2.webp" class="absolute inset-0 w-full h-full object-cover" alt="Gallery Banner">
-    <div class="absolute inset-0 bg-black/60 pointer-events-none"></div>
-    <div class="relative text-center text-white z-10">
-        <p class="tracking-widest text-xs text-yellow-400 mb-3 uppercase">Our Collection</p>
-        <h1 class="text-5xl font-semibold tracking-widest">GALLERY</h1>
-        <div class="mt-4 w-16 h-0.5 bg-yellow-500 mx-auto"></div>
-        <p class="mt-4 text-gray-300 text-sm">Keindahan dan kenyamanan yang kami tawarkan</p>
-    </div>
-</section>
+<x-page-banner
+    image="/images/gallery2.webp"
+    eyebrow="Our Collection"
+    title="GALLERY"
+    subtitle="Keindahan dan kenyamanan yang kami tawarkan"
+    overlay="bg-black/60"
+/>
 
-<!-- BREADCRUMB -->
-<div class="bg-white px-16 py-4 border-b text-sm text-gray-500 flex items-center gap-2">
-    <a href="{{ route('home') }}" class="hover:text-yellow-600 transition">Home</a>
-    <span class="text-gray-300">/</span>
-    <span class="text-yellow-600 font-medium">Gallery</span>
-</div>
+<x-breadcrumb :links="[
+    ['label' => 'Gallery'],
+]" />
 
 <!-- FILTER TABS -->
 <section class="bg-white py-10 px-6">

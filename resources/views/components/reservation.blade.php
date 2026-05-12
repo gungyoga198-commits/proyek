@@ -1,25 +1,17 @@
 {{-- RESERVATION FORM - DATA PRIBADI & PEMBAYARAN --}}
 <main>
+    
+    <x-page-banner
+        image="/images/OGAG.jpg"
+        eyebrow="RESERVASI"
+        title="FORMULIR PEMESANAN"
+        overlay="bg-black/60"
+    />
 
-    {{-- HERO BANNER --}}
-    <section class="relative h-64 flex items-center justify-center overflow-hidden">
-        <img src="/images/OGAG.jpg" class="absolute inset-0 w-full h-full object-cover" alt="Reservation">
-        <div class="absolute inset-0 bg-black/60"></div>
-        <div class="relative text-center text-white z-10">
-            <p class="tracking-widest text-sm text-yellow-400 mb-2">RESERVASI</p>
-            <h1 class="text-4xl font-semibold">FORMULIR PEMESANAN</h1>
-            <div class="mt-4 w-16 h-0.5 bg-yellow-500 mx-auto"></div>
-        </div>
-    </section>
-
-    {{-- BREADCRUMB --}}
-    <div class="bg-white px-16 py-4 border-b text-sm text-gray-500">
-        <a href="{{ route('home') }}" class="hover:text-yellow-600 transition">Home</a>
-        <span class="mx-2">/</span>
-        <a href="{{ route('booking') }}" class="hover:text-yellow-600 transition">Booking</a>
-        <span class="mx-2">/</span>
-        <span class="text-yellow-600 font-medium">Reservasi</span>
-    </div>
+    <x-breadcrumb :links="[
+        ['label' => 'Booking', 'route' => 'booking'],
+        ['label' => 'Reservasi'],
+    ]" />
 
     <section class="bg-gray-50 py-14 px-6 md:px-10">
         <div class="max-w-6xl mx-auto">

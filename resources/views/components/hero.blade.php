@@ -8,19 +8,35 @@
         <div class="w-1/2 h-full relative">
             <img src="/images/dashboard.png" class="w-full h-full object-cover" alt="">
             <div class="absolute inset-0 bg-black/30 pointer-events-none"></div>
+
+            <!-- Badge -->
+            <div class="absolute bottom-10 left-10 bg-black/50 backdrop-blur-sm border border-yellow-600/40 px-6 py-4">
+                <p class="text-[10px] tracking-[3px] uppercase text-yellow-400 mb-1">Bali · Legian</p>
+                <p class="text-lg font-light text-white">BUKYUK Resort</p>
+            </div>
         </div>
 
         <!-- KANAN (TEXT) -->
-        <div class="w-1/2 h-full bg-white flex items-center justify-center px-16">
-            <div class="max-w-md">
-                <p class="tracking-widest text-gray-500 mb-2">OGAG</p>
-                <h1 class="text-4xl mb-4">VILLA</h1>
-                <p class="text-gray-600 leading-relaxed">
+        <div class="w-1/2 h-full bg-white flex items-center justify-center px-16 relative overflow-hidden">
+
+            <!-- Dekorasi -->
+            <div class="absolute top-0 right-0 w-40 h-40 bg-yellow-100 rounded-full blur-3xl opacity-50"></div>
+            <div class="absolute bottom-0 left-0 w-32 h-32 bg-gray-200 rounded-full blur-2xl opacity-40"></div>
+
+            <div class="max-w-md relative z-10">
+
+                <p class="tracking-widest text-gray-500 mb-2">BUKYUK</p>
+                <h1 class="text-4xl mb-4 font-semibold">VILLA</h1>
+
+                <p class="text-gray-600 leading-relaxed mb-6">
                     Nikmati masa menginap Anda di resor kami. Kami menciptakan perjalanan yang benar-benar memuaskan dan bermakna dengan tim yang bersemangat untuk pengalaman dan kenyamanan Anda.
                 </p>
-                <button class="mt-6 bg-yellow-600 text-white px-6 py-3">
+
+                <!-- BUTTON -->
+                <button class="bg-yellow-600 hover:bg-yellow-700 transition text-white px-6 py-3 shadow-md">
                     About Us
                 </button>
+
             </div>
         </div>
 
@@ -34,7 +50,7 @@
             <p class="text-sm tracking-widest text-gray-500">OUR</p>
             <h2 class="text-2xl font-semibold mb-3">ROOM</h2>
             <p class="text-gray-500 max-w-xl mx-auto text-sm">
-                Discover exclusive savings and distinct offerings at iconic destinations spanning coast to coast.
+                Temukan kenyamanan dan kemewahan di setiap kamar kami
             </p>
         </div>
 
@@ -48,7 +64,7 @@
                     <p class="font-semibold">Classic</p>
                     <p class="text-gray-400 mb-3">Terrace</p>
                     <p class="text-gray-600 mb-4">
-                        Located on the ground floor and designed to accommodate up to 2 persons, with the option of a queen and twin beds.
+                        Located on the ground floor and designed to accommodate up to 2 persons.
                     </p>
                     <div class="flex justify-between text-gray-500 text-xs">
                         <span>👤 2 People</span>
@@ -56,7 +72,7 @@
                     </div>
                     <div class="flex justify-between text-gray-500 text-xs mt-2">
                         <span>📐 25 m²</span>
-                        <span>🛏 Double Extra</span>
+                        <span>🛏 Double</span>
                     </div>
                 </div>
             </div>
@@ -68,11 +84,11 @@
                     <p class="font-semibold">Deluxe</p>
                     <p class="text-gray-400 mb-3">Daybed</p>
                     <p class="text-gray-600 mb-4">
-                        Located on the upper & ground floor designed to accommodate up to 2 persons, with balcony overlooking garden.
+                        Designed to accommodate up to 3 persons with balcony.
                     </p>
                     <div class="flex justify-between text-gray-500 text-xs">
                         <span>👤 3 People</span>
-                        <span>🌿 Pool or Garden</span>
+                        <span>🌿 Garden</span>
                     </div>
                     <div class="flex justify-between text-gray-500 text-xs mt-2">
                         <span>📐 39 m²</span>
@@ -88,7 +104,7 @@
                     <p class="font-semibold">Superior</p>
                     <p class="text-gray-400 mb-3">Room</p>
                     <p class="text-gray-600 mb-4">
-                        Located on the 1st & 2nd floor designed to accommodate up to 3 persons, with balcony overlooking garden.
+                        Comfortable room for up to 2 persons with garden view.
                     </p>
                     <div class="flex justify-between text-gray-500 text-xs">
                         <span>👤 2 People</span>
@@ -96,7 +112,7 @@
                     </div>
                     <div class="flex justify-between text-gray-500 text-xs mt-2">
                         <span>📐 30 m²</span>
-                        <span>🛏 Double / Twin Bed</span>
+                        <span>🛏 Twin / Double</span>
                     </div>
                 </div>
             </div>

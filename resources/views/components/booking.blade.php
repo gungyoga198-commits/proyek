@@ -1,24 +1,16 @@
 {{-- BOOKING PAGE - PILIH KAMAR & TANGGAL --}}
 <main>
 
-    {{-- HERO BANNER --}}
-    <section class="relative h-72 flex items-center justify-center overflow-hidden">
-        <img src="/images/OGAG.jpg" class="absolute inset-0 w-full h-full object-cover" alt="Booking Banner">
-        <div class="absolute inset-0 bg-black/55"></div>
-        <div class="relative text-center text-white z-10">
-            <p class="tracking-widest text-sm text-yellow-400 mb-2">RESERVASI</p>
-            <h1 class="text-4xl font-semibold">BOOK YOUR STAY</h1>
-            <div class="mt-4 w-16 h-0.5 bg-yellow-500 mx-auto"></div>
-            <p class="mt-4 text-gray-300 text-sm">Pilih kamar dan tanggal menginap Anda</p>
-        </div>
-    </section>
+        <x-page-banner
+            image="/images/OGAG.jpg"
+            eyebrow="RESERVASI"
+            title="BOOK YOUR STAY"
+            subtitle="Pilih kamar dan tanggal menginap Anda"
+        />
 
-    {{-- BREADCRUMB --}}
-    <div class="bg-white px-16 py-4 border-b text-sm text-gray-500">
-        <a href="{{ route('home') }}" class="hover:text-yellow-600 transition">Home</a>
-        <span class="mx-2">/</span>
-        <span class="text-yellow-600 font-medium">Booking</span>
-    </div>
+        <x-breadcrumb :links="[
+            ['label' => 'Booking'],
+        ]" />
 
     @if(session('error'))
         <div class="bg-red-50 border border-red-200 text-red-700 px-10 py-3 mt-4 mx-10 rounded text-sm">
