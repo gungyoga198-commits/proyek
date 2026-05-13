@@ -1,17 +1,23 @@
 <!-- GALLERY PAGE -->
 
 <!-- HERO BANNER -->
-<x-page-banner
-    image="/images/gallery2.webp"
-    eyebrow="Our Collection"
-    title="GALLERY"
-    subtitle="Keindahan dan kenyamanan yang kami tawarkan"
-    overlay="bg-black/60"
-/>
+<section class="relative h-72 flex items-center justify-center overflow-hidden">
+    <img src="/images/gallery2.webp" class="absolute inset-0 w-full h-full object-cover" alt="Gallery Banner">
+    <div class="absolute inset-0 bg-black/60 pointer-events-none"></div>
+    <div class="relative text-center text-white z-10">
+        <p class="tracking-widest text-xs text-yellow-400 mb-3 uppercase">Our Collection</p>
+        <h1 class="text-5xl font-semibold tracking-widest">GALLERY</h1>
+        <div class="mt-4 w-16 h-0.5 bg-yellow-500 mx-auto"></div>
+        <p class="mt-4 text-gray-300 text-sm">Keindahan dan kenyamanan yang kami tawarkan</p>
+    </div>
+</section>
 
-<x-breadcrumb :links="[
-    ['label' => 'Gallery'],
-]" />
+<!-- BREADCRUMB -->
+<div class="bg-white px-16 py-4 border-b text-sm text-gray-500 flex items-center gap-2">
+    <a href="{{ route('home') }}" class="hover:text-yellow-600 transition">Home</a>
+    <span class="text-gray-300">/</span>
+    <span class="text-yellow-600 font-medium">Gallery</span>
+</div>
 
 <!-- FILTER TABS -->
 <section class="bg-white py-10 px-6">
@@ -37,158 +43,312 @@
 
 <!-- GALLERY GRID -->
 <section class="bg-gray-50 pb-24 px-6 md:px-16">
-    <div class="max-w-6xl mx-auto columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4" id="gallery-grid">
+    <div class="max-w-6xl mx-auto columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6" id="gallery-grid">
 
         <!-- IMAGE 1 -->
-        <div class="gallery-item break-inside-avoid group relative overflow-hidden rounded-lg shadow-md cursor-pointer"
+        <div class="gallery-item break-inside-avoid group cursor-pointer"
              data-category="exterior"
              onclick="openLightbox('/images/gallery1.jpg', 'Villa Exterior with Pool')">
-            <img src="/images/gallery1.jpg" class="w-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Villa Exterior">
-            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
-                <div class="opacity-0 group-hover:opacity-100 transition-all duration-300 text-center text-white">
-                    <p class="text-2xl mb-1">🔍</p>
-                    <p class="text-sm tracking-widest">VIEW</p>
+            {{-- Border kuning di luar foto --}}
+            <div class="border-2 border-yellow-500 rounded-lg p-1.5
+                        group-hover:border-yellow-600
+                        transition-colors duration-300 shadow-md">
+                <div class="relative overflow-hidden rounded-md">
+                    <img src="/images/gallery1.jpg"
+                         class="w-full object-cover
+                                group-hover:scale-110
+                                transition-transform duration-700"
+                         alt="Villa Exterior">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40
+                                transition-all duration-300
+                                flex items-center justify-center">
+                        <div class="opacity-0 group-hover:opacity-100
+                                    transition-all duration-300
+                                    text-center text-white">
+                            <p class="text-2xl mb-1">🔍</p>
+                            <p class="text-sm tracking-widest">VIEW</p>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0
+                                bg-gradient-to-t from-black/70 to-transparent p-4
+                                translate-y-full group-hover:translate-y-0
+                                transition-transform duration-300">
+                        <p class="text-white text-sm font-semibold">Villa Exterior</p>
+                        <p class="text-yellow-400 text-xs tracking-wide">Exterior</p>
+                    </div>
                 </div>
-            </div>
-            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <p class="text-white text-sm font-semibold">Villa Exterior</p>
-                <p class="text-yellow-400 text-xs tracking-wide">Exterior</p>
             </div>
         </div>
 
         <!-- IMAGE 2 -->
-        <div class="gallery-item break-inside-avoid group relative overflow-hidden rounded-lg shadow-md cursor-pointer"
+        <div class="gallery-item break-inside-avoid group cursor-pointer"
              data-category="pool"
              onclick="openLightbox('/images/gallery2.webp', 'Private Pool Villa')">
-            <img src="/images/gallery2.webp" class="w-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Private Pool">
-            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
-                <div class="opacity-0 group-hover:opacity-100 transition-all duration-300 text-center text-white">
-                    <p class="text-2xl mb-1">🔍</p>
-                    <p class="text-sm tracking-widest">VIEW</p>
+            <div class="border-2 border-yellow-500 rounded-lg p-1.5
+                        group-hover:border-yellow-600
+                        transition-colors duration-300 shadow-md">
+                <div class="relative overflow-hidden rounded-md">
+                    <img src="/images/gallery2.webp"
+                         class="w-full object-cover
+                                group-hover:scale-110
+                                transition-transform duration-700"
+                         alt="Private Pool">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40
+                                transition-all duration-300
+                                flex items-center justify-center">
+                        <div class="opacity-0 group-hover:opacity-100
+                                    transition-all duration-300
+                                    text-center text-white">
+                            <p class="text-2xl mb-1">🔍</p>
+                            <p class="text-sm tracking-widest">VIEW</p>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0
+                                bg-gradient-to-t from-black/70 to-transparent p-4
+                                translate-y-full group-hover:translate-y-0
+                                transition-transform duration-300">
+                        <p class="text-white text-sm font-semibold">Private Pool Villa</p>
+                        <p class="text-yellow-400 text-xs tracking-wide">Pool</p>
+                    </div>
                 </div>
-            </div>
-            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <p class="text-white text-sm font-semibold">Private Pool Villa</p>
-                <p class="text-yellow-400 text-xs tracking-wide">Pool</p>
             </div>
         </div>
 
         <!-- IMAGE 3 -->
-        <div class="gallery-item break-inside-avoid group relative overflow-hidden rounded-lg shadow-md cursor-pointer"
+        <div class="gallery-item break-inside-avoid group cursor-pointer"
              data-category="room"
              onclick="openLightbox('/images/Deluxe.jpg', 'Deluxe Room')">
-            <img src="/images/Deluxe.jpg" class="w-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Deluxe Room">
-            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
-                <div class="opacity-0 group-hover:opacity-100 transition-all duration-300 text-center text-white">
-                    <p class="text-2xl mb-1">🔍</p>
-                    <p class="text-sm tracking-widest">VIEW</p>
+            <div class="border-2 border-yellow-500 rounded-lg p-1.5
+                        group-hover:border-yellow-600
+                        transition-colors duration-300 shadow-md">
+                <div class="relative overflow-hidden rounded-md">
+                    <img src="/images/Deluxe.jpg"
+                         class="w-full object-cover
+                                group-hover:scale-110
+                                transition-transform duration-700"
+                         alt="Deluxe Room">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40
+                                transition-all duration-300
+                                flex items-center justify-center">
+                        <div class="opacity-0 group-hover:opacity-100
+                                    transition-all duration-300
+                                    text-center text-white">
+                            <p class="text-2xl mb-1">🔍</p>
+                            <p class="text-sm tracking-widest">VIEW</p>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0
+                                bg-gradient-to-t from-black/70 to-transparent p-4
+                                translate-y-full group-hover:translate-y-0
+                                transition-transform duration-300">
+                        <p class="text-white text-sm font-semibold">Deluxe Room</p>
+                        <p class="text-yellow-400 text-xs tracking-wide">Rooms</p>
+                    </div>
                 </div>
-            </div>
-            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <p class="text-white text-sm font-semibold">Deluxe Room</p>
-                <p class="text-yellow-400 text-xs tracking-wide">Rooms</p>
             </div>
         </div>
 
         <!-- IMAGE 4 -->
-        <div class="gallery-item break-inside-avoid group relative overflow-hidden rounded-lg shadow-md cursor-pointer"
+        <div class="gallery-item break-inside-avoid group cursor-pointer"
              data-category="room"
              onclick="openLightbox('/images/Family.jpg', 'Family Room')">
-            <img src="/images/Family.jpg" class="w-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Family Room">
-            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
-                <div class="opacity-0 group-hover:opacity-100 transition-all duration-300 text-center text-white">
-                    <p class="text-2xl mb-1">🔍</p>
-                    <p class="text-sm tracking-widest">VIEW</p>
+            <div class="border-2 border-yellow-500 rounded-lg p-1.5
+                        group-hover:border-yellow-600
+                        transition-colors duration-300 shadow-md">
+                <div class="relative overflow-hidden rounded-md">
+                    <img src="/images/Family.jpg"
+                         class="w-full object-cover
+                                group-hover:scale-110
+                                transition-transform duration-700"
+                         alt="Family Room">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40
+                                transition-all duration-300
+                                flex items-center justify-center">
+                        <div class="opacity-0 group-hover:opacity-100
+                                    transition-all duration-300
+                                    text-center text-white">
+                            <p class="text-2xl mb-1">🔍</p>
+                            <p class="text-sm tracking-widest">VIEW</p>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0
+                                bg-gradient-to-t from-black/70 to-transparent p-4
+                                translate-y-full group-hover:translate-y-0
+                                transition-transform duration-300">
+                        <p class="text-white text-sm font-semibold">Family Room</p>
+                        <p class="text-yellow-400 text-xs tracking-wide">Rooms</p>
+                    </div>
                 </div>
-            </div>
-            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <p class="text-white text-sm font-semibold">Family Room</p>
-                <p class="text-yellow-400 text-xs tracking-wide">Rooms</p>
             </div>
         </div>
 
         <!-- IMAGE 5 -->
-        <div class="gallery-item break-inside-avoid group relative overflow-hidden rounded-lg shadow-md cursor-pointer"
+        <div class="gallery-item break-inside-avoid group cursor-pointer"
              data-category="room"
              onclick="openLightbox('/images/Presidential.jpg', 'Presidential Suite')">
-            <img src="/images/Presidential.jpg" class="w-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Presidential Suite">
-            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
-                <div class="opacity-0 group-hover:opacity-100 transition-all duration-300 text-center text-white">
-                    <p class="text-2xl mb-1">🔍</p>
-                    <p class="text-sm tracking-widest">VIEW</p>
+            <div class="border-2 border-yellow-500 rounded-lg p-1.5
+                        group-hover:border-yellow-600
+                        transition-colors duration-300 shadow-md">
+                <div class="relative overflow-hidden rounded-md">
+                    <img src="/images/Presidential.jpg"
+                         class="w-full object-cover
+                                group-hover:scale-110
+                                transition-transform duration-700"
+                         alt="Presidential Suite">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40
+                                transition-all duration-300
+                                flex items-center justify-center">
+                        <div class="opacity-0 group-hover:opacity-100
+                                    transition-all duration-300
+                                    text-center text-white">
+                            <p class="text-2xl mb-1">🔍</p>
+                            <p class="text-sm tracking-widest">VIEW</p>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0
+                                bg-gradient-to-t from-black/70 to-transparent p-4
+                                translate-y-full group-hover:translate-y-0
+                                transition-transform duration-300">
+                        <p class="text-white text-sm font-semibold">Presidential Suite</p>
+                        <p class="text-yellow-400 text-xs tracking-wide">Rooms</p>
+                    </div>
                 </div>
-            </div>
-            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <p class="text-white text-sm font-semibold">Presidential Suite</p>
-                <p class="text-yellow-400 text-xs tracking-wide">Rooms</p>
             </div>
         </div>
 
         <!-- IMAGE 6 -->
-        <div class="gallery-item break-inside-avoid group relative overflow-hidden rounded-lg shadow-md cursor-pointer"
+        <div class="gallery-item break-inside-avoid group cursor-pointer"
              data-category="exterior"
              onclick="openLightbox('/images/OGAG.jpg', 'Hotel Exterior')">
-            <img src="/images/OGAG.jpg" class="w-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Hotel Exterior">
-            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
-                <div class="opacity-0 group-hover:opacity-100 transition-all duration-300 text-center text-white">
-                    <p class="text-2xl mb-1">🔍</p>
-                    <p class="text-sm tracking-widest">VIEW</p>
+            <div class="border-2 border-yellow-500 rounded-lg p-1.5
+                        group-hover:border-yellow-600
+                        transition-colors duration-300 shadow-md">
+                <div class="relative overflow-hidden rounded-md">
+                    <img src="/images/OGAG.jpg"
+                         class="w-full object-cover
+                                group-hover:scale-110
+                                transition-transform duration-700"
+                         alt="Hotel Exterior">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40
+                                transition-all duration-300
+                                flex items-center justify-center">
+                        <div class="opacity-0 group-hover:opacity-100
+                                    transition-all duration-300
+                                    text-center text-white">
+                            <p class="text-2xl mb-1">🔍</p>
+                            <p class="text-sm tracking-widest">VIEW</p>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0
+                                bg-gradient-to-t from-black/70 to-transparent p-4
+                                translate-y-full group-hover:translate-y-0
+                                transition-transform duration-300">
+                        <p class="text-white text-sm font-semibold">Hotel Exterior</p>
+                        <p class="text-yellow-400 text-xs tracking-wide">Exterior</p>
+                    </div>
                 </div>
-            </div>
-            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <p class="text-white text-sm font-semibold">Hotel Exterior</p>
-                <p class="text-yellow-400 text-xs tracking-wide">Exterior</p>
             </div>
         </div>
 
         <!-- IMAGE 7 -->
-        <div class="gallery-item break-inside-avoid group relative overflow-hidden rounded-lg shadow-md cursor-pointer"
+        <div class="gallery-item break-inside-avoid group cursor-pointer"
              data-category="pool"
              onclick="openLightbox('/images/gallery2.webp', 'Private Pool')">
-            <img src="/images/gallery2.webp" class="w-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Private Pool">
-            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
-                <div class="opacity-0 group-hover:opacity-100 transition-all duration-300 text-center text-white">
-                    <p class="text-2xl mb-1">🔍</p>
-                    <p class="text-sm tracking-widest">VIEW</p>
+            <div class="border-2 border-yellow-500 rounded-lg p-1.5
+                        group-hover:border-yellow-600
+                        transition-colors duration-300 shadow-md">
+                <div class="relative overflow-hidden rounded-md">
+                    <img src="/images/gallery2.webp"
+                         class="w-full object-cover
+                                group-hover:scale-110
+                                transition-transform duration-700"
+                         alt="Private Pool">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40
+                                transition-all duration-300
+                                flex items-center justify-center">
+                        <div class="opacity-0 group-hover:opacity-100
+                                    transition-all duration-300
+                                    text-center text-white">
+                            <p class="text-2xl mb-1">🔍</p>
+                            <p class="text-sm tracking-widest">VIEW</p>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0
+                                bg-gradient-to-t from-black/70 to-transparent p-4
+                                translate-y-full group-hover:translate-y-0
+                                transition-transform duration-300">
+                        <p class="text-white text-sm font-semibold">Private Pool</p>
+                        <p class="text-yellow-400 text-xs tracking-wide">Pool</p>
+                    </div>
                 </div>
-            </div>
-            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <p class="text-white text-sm font-semibold">Private Pool</p>
-                <p class="text-yellow-400 text-xs tracking-wide">Pool</p>
             </div>
         </div>
 
         <!-- IMAGE 8 -->
-        <div class="gallery-item break-inside-avoid group relative overflow-hidden rounded-lg shadow-md cursor-pointer"
+        <div class="gallery-item break-inside-avoid group cursor-pointer"
              data-category="pool"
              onclick="openLightbox('/images/gallery1.jpg', 'Pool Area')">
-            <img src="/images/gallery1.jpg" class="w-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Pool Area">
-            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
-                <div class="opacity-0 group-hover:opacity-100 transition-all duration-300 text-center text-white">
-                    <p class="text-2xl mb-1">🔍</p>
-                    <p class="text-sm tracking-widest">VIEW</p>
+            <div class="border-2 border-yellow-500 rounded-lg p-1.5
+                        group-hover:border-yellow-600
+                        transition-colors duration-300 shadow-md">
+                <div class="relative overflow-hidden rounded-md">
+                    <img src="/images/gallery1.jpg"
+                         class="w-full object-cover
+                                group-hover:scale-110
+                                transition-transform duration-700"
+                         alt="Pool Area">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40
+                                transition-all duration-300
+                                flex items-center justify-center">
+                        <div class="opacity-0 group-hover:opacity-100
+                                    transition-all duration-300
+                                    text-center text-white">
+                            <p class="text-2xl mb-1">🔍</p>
+                            <p class="text-sm tracking-widest">VIEW</p>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0
+                                bg-gradient-to-t from-black/70 to-transparent p-4
+                                translate-y-full group-hover:translate-y-0
+                                transition-transform duration-300">
+                        <p class="text-white text-sm font-semibold">Pool Area</p>
+                        <p class="text-yellow-400 text-xs tracking-wide">Pool</p>
+                    </div>
                 </div>
-            </div>
-            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <p class="text-white text-sm font-semibold">Pool Area</p>
-                <p class="text-yellow-400 text-xs tracking-wide">Pool</p>
             </div>
         </div>
 
         <!-- IMAGE 9 -->
-        <div class="gallery-item break-inside-avoid group relative overflow-hidden rounded-lg shadow-md cursor-pointer"
+        <div class="gallery-item break-inside-avoid group cursor-pointer"
              data-category="exterior"
              onclick="openLightbox('/images/gallery1.jpg', 'Villa with Pool')">
-            <img src="/images/gallery1.jpg" class="w-full object-cover group-hover:scale-110 transition-transform duration-700 brightness-90" alt="Villa with Pool">
-            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
-                <div class="opacity-0 group-hover:opacity-100 transition-all duration-300 text-center text-white">
-                    <p class="text-2xl mb-1">🔍</p>
-                    <p class="text-sm tracking-widest">VIEW</p>
+            <div class="border-2 border-yellow-500 rounded-lg p-1.5
+                        group-hover:border-yellow-600
+                        transition-colors duration-300 shadow-md">
+                <div class="relative overflow-hidden rounded-md">
+                    <img src="/images/gallery1.jpg"
+                         class="w-full object-cover
+                                group-hover:scale-110
+                                transition-transform duration-700 brightness-90"
+                         alt="Villa with Pool">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40
+                                transition-all duration-300
+                                flex items-center justify-center">
+                        <div class="opacity-0 group-hover:opacity-100
+                                    transition-all duration-300
+                                    text-center text-white">
+                            <p class="text-2xl mb-1">🔍</p>
+                            <p class="text-sm tracking-widest">VIEW</p>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0
+                                bg-gradient-to-t from-black/70 to-transparent p-4
+                                translate-y-full group-hover:translate-y-0
+                                transition-transform duration-300">
+                        <p class="text-white text-sm font-semibold">Villa with Pool</p>
+                        <p class="text-yellow-400 text-xs tracking-wide">Exterior</p>
+                    </div>
                 </div>
-            </div>
-            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <p class="text-white text-sm font-semibold">Villa with Pool</p>
-                <p class="text-yellow-400 text-xs tracking-wide">Exterior</p>
             </div>
         </div>
 
