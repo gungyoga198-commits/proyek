@@ -62,7 +62,7 @@
 
         <!-- FOOTER TEXT -->
         <p class="text-xs text-center text-gray-300 mt-6">
-            © 2026 OGAG Resort
+            © 2026 BUKYUK VILLA
         </p>
 
     </div>
