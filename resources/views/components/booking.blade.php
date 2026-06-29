@@ -18,7 +18,7 @@
         </div>
     @endif
 
-    {{-- ── FORM PENCARIAN (Desain A) ── --}}
+    {{-- ── FORM PENCARIAN ── --}}
     <section class="bg-white py-10 px-6 shadow-sm">
         <form action="{{ route('booking') }}" method="GET">
             <div class="max-w-5xl mx-auto">
@@ -45,7 +45,7 @@
                             class="w-full border border-gray-200 rounded px-3 py-2.5 text-sm focus:outline-none focus:border-yellow-500 transition">
                     </div>
 
-                    {{-- Jumlah Tamu — counter +/- --}}
+                    {{-- Jumlah Tamu --}}
                     <div>
                         <label class="text-xs text-gray-500 font-medium block mb-1 uppercase tracking-wide">
                             Jumlah Tamu <span class="normal-case text-gray-400">(maks. 6)</span>
@@ -93,7 +93,7 @@
 
             @if(!$checkin || !$checkout)
 
-                {{-- EMPTY STATE — belum isi tanggal --}}
+                {{-- EMPTY STATE --}}
                 <div class="flex flex-col items-center justify-center py-24 text-center">
                     <div class="w-20 h-20 rounded-full bg-yellow-50 flex items-center justify-center mb-6">
                         <svg class="w-9 h-9 text-yellow-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
@@ -112,7 +112,7 @@
 
             @else
 
-                {{-- HEADER SECTION KAMAR --}}
+                {{-- HEADER --}}
                 <div class="text-center mb-12">
                     <p class="text-xs tracking-widest text-gray-400 uppercase mb-1">Pilihan Kamar</p>
                     <h2 class="text-2xl font-semibold">KAMAR TERSEDIA</h2>
@@ -135,19 +135,20 @@
                 <div class="grid md:grid-cols-3 gap-8">
                     @foreach($rooms as $room)
                     @php
-                        $isSelected = ($selected ?? '') === $room['name'];
+                        $isSelected = ($selected ?? '') === $room->nama;
                         $nights     = max(1, \Carbon\Carbon::parse($checkin)->diffInDays(\Carbon\Carbon::parse($checkout)));
+                        $fasilitas  = is_array($room->fasilitas) ? $room->fasilitas : json_decode($room->fasilitas ?? '[]', true);
                     @endphp
 
                     <div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-xl transition-all duration-300 group
                         {{ $isSelected ? 'ring-2 ring-yellow-500' : 'border border-transparent' }}">
 
                         <div class="relative overflow-hidden">
-                            <img src="{{ $room['image'] }}"
+                            <img src="{{ $room->gambar ? asset('storage/' . $room->gambar) : '/images/OGAG.jpg' }}"
                                  class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
-                                 alt="{{ $room['name'] }}">
+                                 alt="{{ $room->nama }}">
                             <div class="absolute top-3 left-3 bg-yellow-600 text-white text-xs px-3 py-1 tracking-widest">
-                                {{ $room['type'] }}
+                                {{ $room->tipe }}
                             </div>
                             @if($isSelected)
                             <div class="absolute top-3 right-3 bg-green-500 text-white text-xs px-3 py-1 rounded-full">
@@ -157,19 +158,19 @@
                         </div>
 
                         <div class="p-5 text-sm">
-                            <p class="font-semibold text-lg">{{ $room['name'] }}</p>
-                            <p class="text-gray-400 mb-3 text-xs tracking-wide">{{ $room['location'] }}</p>
-                            <p class="text-gray-600 mb-4 leading-relaxed text-xs">{{ $room['description'] }}</p>
+                            <p class="font-semibold text-lg">{{ $room->nama }}</p>
+                            <p class="text-gray-400 mb-3 text-xs tracking-wide">{{ $room->pemandangan }}</p>
+                            <p class="text-gray-600 mb-4 leading-relaxed text-xs">{{ $room->deskripsi }}</p>
 
                             <div class="grid grid-cols-2 text-gray-500 text-xs gap-y-2 mb-4">
-                                <span>👤 {{ $room['capacity'] }}</span>
-                                <span>🌿 {{ $room['view'] }}</span>
-                                <span>📐 {{ $room['size'] }}</span>
-                                <span>🛏 {{ $room['bed'] }}</span>
+                                <span>👤 {{ $room->kapasitas }} Tamu</span>
+                                <span>🌿 {{ $room->pemandangan }}</span>
+                                <span>📐 {{ $room->ukuran }}</span>
+                                <span>🛏 {{ $room->tipe_bed }}</span>
                             </div>
 
                             <div class="flex flex-wrap gap-1 mb-4">
-                                @foreach($room['facilities'] as $f)
+                                @foreach($fasilitas as $f)
                                 <span class="bg-gray-100 text-gray-500 text-xs px-2 py-0.5 rounded">{{ $f }}</span>
                                 @endforeach
                             </div>
@@ -178,16 +179,16 @@
                                 <div>
                                     <p class="text-xs text-gray-400">Mulai dari</p>
                                     <p class="text-yellow-600 font-semibold text-base">
-                                        Rp {{ number_format($room['price'], 0, ',', '.') }}
+                                        Rp {{ number_format($room->harga_per_malam, 0, ',', '.') }}
                                         <span class="text-xs text-gray-400 font-normal">/ malam</span>
                                     </p>
                                     <p class="text-xs text-green-600 mt-0.5">
-                                        Total: Rp {{ number_format($room['price'] * $nights, 0, ',', '.') }}
+                                        Total: Rp {{ number_format($room->harga_per_malam * $nights, 0, ',', '.') }}
                                     </p>
                                 </div>
 
                                 <form action="{{ route('booking') }}" method="GET">
-                                    <input type="hidden" name="room"     value="{{ $room['name'] }}">
+                                    <input type="hidden" name="room"     value="{{ $room->nama }}">
                                     <input type="hidden" name="checkin"  value="{{ $checkin }}">
                                     <input type="hidden" name="checkout" value="{{ $checkout }}">
                                     <input type="hidden" name="guests"   value="{{ $guests }}">
@@ -209,17 +210,18 @@
                 {{-- Panel lanjutkan --}}
                 @if($selected && $checkin && $checkout)
                 @php
-                    $selectedRoom = collect($rooms)->firstWhere('name', $selected);
+                    $selectedRoom = $rooms->firstWhere('nama', $selected);
                     $nights       = max(1, \Carbon\Carbon::parse($checkin)->diffInDays(\Carbon\Carbon::parse($checkout)));
                 @endphp
+                @if($selectedRoom)
                 <div class="mt-10 text-center">
                     <div class="bg-white border border-yellow-200 rounded-lg p-6 max-w-lg mx-auto shadow-md">
                         <p class="text-xs text-gray-400 uppercase tracking-widest mb-1">Kamar Dipilih</p>
                         <p class="font-semibold text-xl mb-1 text-gray-800">{{ $selected }}</p>
                         <p class="text-yellow-600 text-sm mb-5">
-                            Rp {{ number_format($selectedRoom['price'], 0, ',', '.') }}
+                            Rp {{ number_format($selectedRoom->harga_per_malam, 0, ',', '.') }}
                             × {{ $nights }} malam =
-                            <strong>Rp {{ number_format($selectedRoom['price'] * $nights, 0, ',', '.') }}</strong>
+                            <strong>Rp {{ number_format($selectedRoom->harga_per_malam * $nights, 0, ',', '.') }}</strong>
                         </p>
                         <a href="{{ route('booking.form') }}?room={{ urlencode($selected) }}&checkin={{ $checkin }}&checkout={{ $checkout }}&guests={{ $guests }}"
                             class="block w-full bg-yellow-600 text-white py-3 text-sm hover:bg-yellow-700 transition rounded tracking-wide text-center">
@@ -227,6 +229,7 @@
                         </a>
                     </div>
                 </div>
+                @endif
                 @endif
 
             @endif

@@ -171,19 +171,20 @@
                 <div class="grid md:grid-cols-3 gap-8">
                     <?php $__currentLoopData = $rooms; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $room): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <?php
-                        $isSelected = ($selected ?? '') === $room['name'];
+                        $isSelected = ($selected ?? '') === $room->nama;
                         $nights     = max(1, \Carbon\Carbon::parse($checkin)->diffInDays(\Carbon\Carbon::parse($checkout)));
+                        $fasilitas  = is_array($room->fasilitas) ? $room->fasilitas : json_decode($room->fasilitas ?? '[]', true);
                     ?>
 
                     <div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-xl transition-all duration-300 group
                         <?php echo e($isSelected ? 'ring-2 ring-yellow-500' : 'border border-transparent'); ?>">
 
                         <div class="relative overflow-hidden">
-                            <img src="<?php echo e($room['image']); ?>"
+                            <img src="<?php echo e($room->gambar ? asset('storage/' . $room->gambar) : '/images/OGAG.jpg'); ?>"
                                  class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
-                                 alt="<?php echo e($room['name']); ?>">
+                                 alt="<?php echo e($room->nama); ?>">
                             <div class="absolute top-3 left-3 bg-yellow-600 text-white text-xs px-3 py-1 tracking-widest">
-                                <?php echo e($room['type']); ?>
+                                <?php echo e($room->tipe); ?>
 
                             </div>
                             <?php if($isSelected): ?>
@@ -194,19 +195,19 @@
                         </div>
 
                         <div class="p-5 text-sm">
-                            <p class="font-semibold text-lg"><?php echo e($room['name']); ?></p>
-                            <p class="text-gray-400 mb-3 text-xs tracking-wide"><?php echo e($room['location']); ?></p>
-                            <p class="text-gray-600 mb-4 leading-relaxed text-xs"><?php echo e($room['description']); ?></p>
+                            <p class="font-semibold text-lg"><?php echo e($room->nama); ?></p>
+                            <p class="text-gray-400 mb-3 text-xs tracking-wide"><?php echo e($room->pemandangan); ?></p>
+                            <p class="text-gray-600 mb-4 leading-relaxed text-xs"><?php echo e($room->deskripsi); ?></p>
 
                             <div class="grid grid-cols-2 text-gray-500 text-xs gap-y-2 mb-4">
-                                <span>👤 <?php echo e($room['capacity']); ?></span>
-                                <span>🌿 <?php echo e($room['view']); ?></span>
-                                <span>📐 <?php echo e($room['size']); ?></span>
-                                <span>🛏 <?php echo e($room['bed']); ?></span>
+                                <span>👤 <?php echo e($room->kapasitas); ?> Tamu</span>
+                                <span>🌿 <?php echo e($room->pemandangan); ?></span>
+                                <span>📐 <?php echo e($room->ukuran); ?></span>
+                                <span>🛏 <?php echo e($room->tipe_bed); ?></span>
                             </div>
 
                             <div class="flex flex-wrap gap-1 mb-4">
-                                <?php $__currentLoopData = $room['facilities']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $f): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php $__currentLoopData = $fasilitas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $f): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <span class="bg-gray-100 text-gray-500 text-xs px-2 py-0.5 rounded"><?php echo e($f); ?></span>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
@@ -215,18 +216,18 @@
                                 <div>
                                     <p class="text-xs text-gray-400">Mulai dari</p>
                                     <p class="text-yellow-600 font-semibold text-base">
-                                        Rp <?php echo e(number_format($room['price'], 0, ',', '.')); ?>
+                                        Rp <?php echo e(number_format($room->harga_per_malam, 0, ',', '.')); ?>
 
                                         <span class="text-xs text-gray-400 font-normal">/ malam</span>
                                     </p>
                                     <p class="text-xs text-green-600 mt-0.5">
-                                        Total: Rp <?php echo e(number_format($room['price'] * $nights, 0, ',', '.')); ?>
+                                        Total: Rp <?php echo e(number_format($room->harga_per_malam * $nights, 0, ',', '.')); ?>
 
                                     </p>
                                 </div>
 
                                 <form action="<?php echo e(route('booking')); ?>" method="GET">
-                                    <input type="hidden" name="room"     value="<?php echo e($room['name']); ?>">
+                                    <input type="hidden" name="room"     value="<?php echo e($room->nama); ?>">
                                     <input type="hidden" name="checkin"  value="<?php echo e($checkin); ?>">
                                     <input type="hidden" name="checkout" value="<?php echo e($checkout); ?>">
                                     <input type="hidden" name="guests"   value="<?php echo e($guests); ?>">
@@ -249,18 +250,19 @@
                 
                 <?php if($selected && $checkin && $checkout): ?>
                 <?php
-                    $selectedRoom = collect($rooms)->firstWhere('name', $selected);
+                    $selectedRoom = $rooms->firstWhere('nama', $selected);
                     $nights       = max(1, \Carbon\Carbon::parse($checkin)->diffInDays(\Carbon\Carbon::parse($checkout)));
                 ?>
+                <?php if($selectedRoom): ?>
                 <div class="mt-10 text-center">
                     <div class="bg-white border border-yellow-200 rounded-lg p-6 max-w-lg mx-auto shadow-md">
                         <p class="text-xs text-gray-400 uppercase tracking-widest mb-1">Kamar Dipilih</p>
                         <p class="font-semibold text-xl mb-1 text-gray-800"><?php echo e($selected); ?></p>
                         <p class="text-yellow-600 text-sm mb-5">
-                            Rp <?php echo e(number_format($selectedRoom['price'], 0, ',', '.')); ?>
+                            Rp <?php echo e(number_format($selectedRoom->harga_per_malam, 0, ',', '.')); ?>
 
                             × <?php echo e($nights); ?> malam =
-                            <strong>Rp <?php echo e(number_format($selectedRoom['price'] * $nights, 0, ',', '.')); ?></strong>
+                            <strong>Rp <?php echo e(number_format($selectedRoom->harga_per_malam * $nights, 0, ',', '.')); ?></strong>
                         </p>
                         <a href="<?php echo e(route('booking.form')); ?>?room=<?php echo e(urlencode($selected)); ?>&checkin=<?php echo e($checkin); ?>&checkout=<?php echo e($checkout); ?>&guests=<?php echo e($guests); ?>"
                             class="block w-full bg-yellow-600 text-white py-3 text-sm hover:bg-yellow-700 transition rounded tracking-wide text-center">
@@ -268,6 +270,7 @@
                         </a>
                     </div>
                 </div>
+                <?php endif; ?>
                 <?php endif; ?>
 
             <?php endif; ?>
@@ -287,5 +290,4 @@
         input.value   = val;
         display.textContent = val + ' Tamu';
     }
-</script>
-<?php /**PATH C:\laragon\www\proyek\resources\views/components/booking.blade.php ENDPATH**/ ?>
+</script><?php /**PATH C:\laragon\www\proyek\resources\views/components/booking.blade.php ENDPATH**/ ?>

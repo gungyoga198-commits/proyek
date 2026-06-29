@@ -48,7 +48,7 @@
                     
                     <div class="relative overflow-hidden bg-gray-200" style="min-height: 220px;">
                         <?php if($room->gambar): ?>
-                            <img src="/<?php echo e(ltrim($room->gambar, '/')); ?>"
+                            <img src="<?php echo e(asset('storage/' . $room->gambar)); ?>"
                                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 absolute inset-0"
                                  alt="<?php echo e($room->nama); ?>">
                         <?php else: ?>

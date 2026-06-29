@@ -48,7 +48,7 @@
                     {{-- GAMBAR KIRI --}}
                     <div class="relative overflow-hidden bg-gray-200" style="min-height: 220px;">
                         @if($room->gambar)
-                            <img src="/{{ ltrim($room->gambar, '/') }}"
+                            <img src="{{ asset('storage/' . $room->gambar) }}"
                                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 absolute inset-0"
                                  alt="{{ $room->nama }}">
                         @else

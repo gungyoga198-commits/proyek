@@ -25,10 +25,10 @@
         <div class="px-6 py-6 border-b border-white/10">
             <div class="flex items-center gap-3">
                 <div class="w-9 h-9 bg-yellow-500 rounded-lg flex items-center justify-center">
-                    <span class="text-gray-900 font-bold text-sm">OG</span>
+                    <span class="text-gray-900 font-bold text-sm">BY</span>
                 </div>
                 <div>
-                    <p class="text-white font-semibold text-sm leading-none">OGAG Hotel</p>
+                    <p class="text-white font-semibold text-sm leading-none">BUKYUK</p>
                     <p class="text-yellow-400 text-xs mt-0.5">Admin Panel</p>
                 </div>
             </div>
