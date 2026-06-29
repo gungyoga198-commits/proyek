@@ -1,8 +1,8 @@
-@extends('admin.layout')
 
-@section('title', 'Kelola Gallery')
 
-@push('styles')
+<?php $__env->startSection('title', 'Kelola Gallery'); ?>
+
+<?php $__env->startPush('styles'); ?>
 <style>
     .page-header {
         background: linear-gradient(135deg, #1a1a2e, #16213e);
@@ -132,9 +132,9 @@
     .stat-num { font-size: 1.8rem; font-weight: 800; color: #1a1a2e; }
     .stat-label { font-size: 0.8rem; color: #666; margin-top: 4px; }
 </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container-fluid px-4">
 
     <!-- HEADER -->
@@ -143,84 +143,87 @@
             <h4><i class="fas fa-images me-2"></i> Kelola Gallery</h4>
             <p>Kelola foto-foto yang ditampilkan di website</p>
         </div>
-        <a href="{{ route('admin.gallery.create') }}" class="btn btn-danger px-4 py-2 fw-bold">
+        <a href="<?php echo e(route('admin.gallery.create')); ?>" class="btn btn-danger px-4 py-2 fw-bold">
             <i class="fas fa-plus me-2"></i> Tambah Foto Baru
         </a>
     </div>
 
     <!-- SUCCESS ALERT -->
-    @if(session('success'))
+    <?php if(session('success')): ?>
     <div class="alert alert-success alert-dismissible fade show">
-        <i class="fas fa-check-circle me-2"></i> {{ session('success') }}
+        <i class="fas fa-check-circle me-2"></i> <?php echo e(session('success')); ?>
+
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
-    @endif
+    <?php endif; ?>
 
     <!-- STATS -->
     <div class="stats-row">
         <div class="stat-card">
-            <div class="stat-num">{{ $galleries->total() }}</div>
+            <div class="stat-num"><?php echo e($galleries->total()); ?></div>
             <div class="stat-label">Total Foto</div>
         </div>
         <div class="stat-card">
-            <div class="stat-num text-success">{{ $galleries->where('aktif', true)->count() }}</div>
+            <div class="stat-num text-success"><?php echo e($galleries->where('aktif', true)->count()); ?></div>
             <div class="stat-label">Foto Aktif</div>
         </div>
         <div class="stat-card">
-            <div class="stat-num text-danger">{{ $galleries->where('aktif', false)->count() }}</div>
+            <div class="stat-num text-danger"><?php echo e($galleries->where('aktif', false)->count()); ?></div>
             <div class="stat-label">Foto Nonaktif</div>
         </div>
     </div>
 
     <!-- GALLERY GRID -->
     <div class="gallery-admin-grid">
-        @forelse($galleries as $item)
-        <div class="gallery-admin-card {{ !$item->aktif ? 'nonaktif' : '' }}">
+        <?php $__empty_1 = true; $__currentLoopData = $galleries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+        <div class="gallery-admin-card <?php echo e(!$item->aktif ? 'nonaktif' : ''); ?>">
             <div class="card-img-wrap">
-                <img src="{{ asset('storage/' . $item->foto) }}" alt="{{ $item->judul }}">
+                <img src="<?php echo e(asset('storage/' . $item->foto)); ?>" alt="<?php echo e($item->judul); ?>">
                 <div class="card-badges">
-                    <span class="badge-kategori">{{ $item->kategori }}</span>
-                    @if(!$item->aktif)
+                    <span class="badge-kategori"><?php echo e($item->kategori); ?></span>
+                    <?php if(!$item->aktif): ?>
                         <span class="badge-nonaktif">NONAKTIF</span>
-                    @endif
+                    <?php endif; ?>
                 </div>
             </div>
 
             <div class="card-body-admin">
-                <h6 title="{{ $item->judul }}">{{ $item->judul }}</h6>
-                <p class="card-desc">{{ Str::limit($item->deskripsi, 80) ?: 'Tidak ada deskripsi' }}</p>
+                <h6 title="<?php echo e($item->judul); ?>"><?php echo e($item->judul); ?></h6>
+                <p class="card-desc"><?php echo e(Str::limit($item->deskripsi, 80) ?: 'Tidak ada deskripsi'); ?></p>
             </div>
 
             <div class="card-actions">
-                <a href="{{ route('admin.gallery.edit', $item) }}" class="btn-action btn-edit">
+                <a href="<?php echo e(route('admin.gallery.edit', $item)); ?>" class="btn-action btn-edit">
                     <i class="fas fa-edit"></i> Edit
                 </a>
-                <form action="{{ route('admin.gallery.destroy', $item) }}" method="POST" 
+                <form action="<?php echo e(route('admin.gallery.destroy', $item)); ?>" method="POST" 
                       onsubmit="return confirm('Yakin hapus foto ini?')" style="flex:1">
-                    @csrf
-                    @method('DELETE')
+                    <?php echo csrf_field(); ?>
+                    <?php echo method_field('DELETE'); ?>
                     <button type="submit" class="btn-action btn-delete">
                         <i class="fas fa-trash"></i>
                     </button>
                 </form>
             </div>
         </div>
-        @empty
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
         <div class="empty-admin text-center py-5">
             <i class="fas fa-images fa-4x mb-3 opacity-25"></i>
             <h5>Belum ada foto</h5>
             <p class="text-muted">Tambahkan foto pertama untuk galeri website Anda</p>
-            <a href="{{ route('admin.gallery.create') }}" class="btn btn-danger mt-3">
+            <a href="<?php echo e(route('admin.gallery.create')); ?>" class="btn btn-danger mt-3">
                 <i class="fas fa-plus"></i> Tambah Foto Pertama
             </a>
         </div>
-        @endforelse
+        <?php endif; ?>
     </div>
 
     <!-- PAGINATION -->
     <div class="d-flex justify-content-center mt-5">
-        {{ $galleries->links() }}
+        <?php echo e($galleries->links()); ?>
+
     </div>
 
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\proyek\resources\views/admin/gallery/index.blade.php ENDPATH**/ ?>

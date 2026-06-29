@@ -169,4 +169,4 @@
 </div>
 
 </body>
-</html><?php /**PATH C:\laragon\www\proyek\resources\views/admin/layout.blade.php ENDPATH**/ ?>
+</html><?php /**PATH C:\laragon\www\proyek\resources\views/layouts/admin.blade.php ENDPATH**/ ?>
