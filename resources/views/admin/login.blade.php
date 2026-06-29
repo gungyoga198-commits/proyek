@@ -52,6 +52,12 @@
                 class="w-full bg-yellow-600 hover:bg-yellow-700 transition py-2 rounded font-semibold tracking-wide">
                 LOGIN
             </button>
+
+            <div class="mt-4 text-center">
+                <a href="{{ route('home') }}" class="text-sm text-gray-300 hover:text-white transition">
+                    ← Kembali ke Home
+                </a>
+            </div>
         </form>
 
         <!-- FOOTER TEXT -->

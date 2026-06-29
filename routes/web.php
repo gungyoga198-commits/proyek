@@ -41,7 +41,7 @@ Route::post('/cek-reservasi',         [BookingController::class, 'cariReservasi'
 
 
 // ── ADMIN AUTH ─────────────────────────────────────────────────────
-Route::get('/admin/anjay13',  [LoginController::class, 'index'])->name('admin.login');
+Route::get('/admin/login',  [LoginController::class, 'index'])->name('admin.login');
 Route::post('/admin/login',   [LoginController::class, 'login']);
 Route::post('/logout',        [LoginController::class, 'logout'])->name('admin.logout');
 
