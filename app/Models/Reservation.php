@@ -28,8 +28,8 @@ class Reservation extends Model
         'metode_pembayaran',
         'tipe_pembayaran',   // lunas | dp
         'jumlah_dp',         // 50% dari total_harga jika dp
-        'batas_bayar',       // created_at + 12 jam
-        'nama_bank',         // BCA | BRI | BNI | MANDIRI | PAYPAL
+        'batas_bayar',
+        'nama_bank',
         'no_rekening',
         'nama_pemegang_kartu',
         'status',

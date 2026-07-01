@@ -1,185 +1,151 @@
-@extends('layouts.admin')
+@extends('admin.layout')
 
 @section('title', 'Edit Foto Gallery')
-
-@push('styles')
-<style>
-    .form-card {
-        background: #fff;
-        border-radius: 16px;
-        padding: 36px;
-        box-shadow: 0 4px 24px rgba(0,0,0,0.07);
-        max-width: 680px;
-        margin: 0 auto;
-    }
-    .form-title {
-        font-size: 1.4rem;
-        font-weight: 800;
-        color: #1a1a2e;
-        margin-bottom: 28px;
-        padding-bottom: 16px;
-        border-bottom: 2px solid #f0f0f0;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    .form-title i { color: #e53935; }
-
-    .current-image {
-        border-radius: 12px;
-        overflow: hidden;
-        border: 3px solid #f0f0f0;
-        margin-bottom: 20px;
-    }
-    .current-image img {
-        width: 100%;
-        max-height: 260px;
-        object-fit: cover;
-    }
-
-    .upload-area {
-        border: 2px dashed #d0d0d0;
-        border-radius: 12px;
-        padding: 30px;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.2s;
-        background: #fafafa;
-    }
-    .upload-area:hover {
-        border-color: #e53935;
-        background: rgba(229,57,53,0.05);
-    }
-
-    .form-label { 
-        font-weight: 600; 
-        color: #333; 
-        font-size: 0.95rem; 
-        margin-bottom: 8px; 
-    }
-    .form-control, .form-select {
-        border-radius: 10px;
-        border: 1.5px solid #e0e0e0;
-        padding: 12px 16px;
-    }
-    .form-control:focus, .form-select:focus {
-        border-color: #e53935;
-        box-shadow: 0 0 0 3px rgba(229,57,53,0.1);
-    }
-
-    .btn-submit {
-        background: linear-gradient(135deg, #e53935, #c62828);
-        color: white;
-        border: none;
-        padding: 12px 40px;
-        border-radius: 10px;
-        font-weight: 700;
-    }
-</style>
-@endpush
+@section('subtitle', 'Perbarui data foto di database')
 
 @section('content')
-<div class="container-fluid px-4">
-    <div class="mb-4">
-        <a href="{{ route('admin.gallery.index') }}" class="text-muted text-decoration-none">
-            <i class="fas fa-arrow-left me-1"></i> Kembali ke Gallery
-        </a>
-    </div>
 
-    <div class="form-card">
-        <div class="form-title">
-            <i class="fas fa-edit"></i> Edit Foto Gallery
+<div class="max-w-3xl">
+
+    <a href="{{ route('admin.gallery.index') }}"
+       class="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 mb-6 transition">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Kembali ke Daftar Gallery
+    </a>
+
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div class="px-6 py-4 border-b border-gray-100 bg-gray-50">
+            <h3 class="font-semibold text-gray-800">✏️ Edit Foto: {{ $gallery->judul }}</h3>
+            <p class="text-xs text-gray-500 mt-0.5">Perbarui data foto di tabel <code>galleries</code></p>
         </div>
 
-        <form action="{{ route('admin.gallery.update', $gallery) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.gallery.update', $gallery) }}" method="POST" enctype="multipart/form-data"
+              class="p-6 space-y-5">
             @csrf
             @method('PUT')
 
-            <!-- Current Image -->
-            <div class="current-image mb-4">
-                <img src="{{ asset('storage/' . $gallery->foto) }}" alt="{{ $gallery->judul }}">
+            {{-- Foto saat ini --}}
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Foto Saat Ini</label>
+                <img src="{{ asset('storage/' . $gallery->foto) }}" alt="{{ $gallery->judul }}"
+                     class="w-full max-h-64 object-cover rounded-xl border border-gray-100">
             </div>
 
-            <!-- Upload New Image -->
-            <div class="mb-4">
-                <label class="form-label">Ganti Foto (Opsional)</label>
-                <div class="upload-area" id="uploadArea">
-                    <input type="file" name="foto" id="fotoInput" accept="image/*">
-                    <i class="fas fa-cloud-upload-alt fa-2x text-muted mb-3"></i>
-                    <p class="mb-1"><strong>Klik untuk upload foto baru</strong></p>
-                    <p class="text-muted small">JPG, PNG, WebP • Maks. 2MB</p>
+            {{-- Ganti Foto --}}
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Ganti Foto (Opsional)</label>
+                <div id="uploadArea"
+                     class="relative border-2 border-dashed border-gray-200 rounded-xl px-6 py-8 text-center cursor-pointer hover:border-yellow-400 hover:bg-yellow-50/30 transition">
+                    <input type="file" name="foto" id="fotoInput" accept="image/*"
+                           class="absolute inset-0 opacity-0 cursor-pointer">
+                    <svg class="w-8 h-8 mx-auto mb-2 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                    </svg>
+                    <p class="text-sm font-medium text-gray-700">Klik untuk upload foto baru</p>
+                    <p class="text-xs text-gray-400 mt-1">JPG, PNG, WebP &middot; Maks. 2MB</p>
                 </div>
-                @error('foto') <small class="text-danger">{{ $message }}</small> @enderror
+
+                <div id="previewWrap" class="mt-3 text-center hidden">
+                    <img id="previewImg" class="max-h-56 mx-auto rounded-xl shadow-sm border border-gray-100" alt="Preview foto baru">
+                    <button type="button" onclick="removePreview()"
+                            class="mt-2 inline-flex items-center gap-1 text-xs bg-red-50 text-red-700 hover:bg-red-100 px-3 py-1.5 rounded-lg transition font-medium">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                        Batalkan Penggantian
+                    </button>
+                </div>
+                @error('foto')
+                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
-            <!-- Judul -->
-            <div class="mb-3">
-                <label class="form-label">Judul Foto <span class="text-danger">*</span></label>
-                <input type="text" name="judul" value="{{ old('judul', $gallery->judul) }}" 
-                       class="form-control @error('judul') is-invalid @enderror" required>
-                @error('judul') <small class="text-danger">{{ $message }}</small> @enderror
+            {{-- Judul --}}
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                    Judul Foto <span class="text-red-500">*</span>
+                </label>
+                <input type="text" name="judul" value="{{ old('judul', $gallery->judul) }}"
+                       class="w-full text-sm border border-gray-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-yellow-400 @error('judul') border-red-400 @enderror">
+                @error('judul')
+                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
-            <!-- Deskripsi -->
-            <div class="mb-3">
-                <label class="form-label">Deskripsi</label>
-                <textarea name="deskripsi" rows="4" class="form-control">{{ old('deskripsi', $gallery->deskripsi) }}</textarea>
+            {{-- Deskripsi --}}
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi</label>
+                <textarea name="deskripsi" rows="3"
+                          class="w-full text-sm border border-gray-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-yellow-400 resize-none">{{ old('deskripsi', $gallery->deskripsi) }}</textarea>
             </div>
 
-            <!-- Kategori & Urutan -->
-            <div class="row">
-                <div class="col-md-8 mb-3">
-                    <label class="form-label">Kategori <span class="text-danger">*</span></label>
-                    <select name="kategori" class="form-select" required>
+            {{-- Kategori & Urutan --}}
+            <div class="grid grid-cols-3 gap-4">
+                <div class="col-span-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">
+                        Kategori <span class="text-red-500">*</span>
+                    </label>
+                    <select name="kategori"
+                            class="w-full text-sm border border-gray-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-yellow-400">
                         @foreach($kategoris as $k)
-                            <option value="{{ $k }}" {{ old('kategori', $gallery->kategori) == $k ? 'selected' : '' }}>
-                                {{ ucfirst($k) }}
-                            </option>
+                        <option value="{{ $k }}" {{ old('kategori', $gallery->kategori) == $k ? 'selected' : '' }}>
+                            {{ ucfirst($k) }}
+                        </option>
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Urutan Tampilan</label>
-                    <input type="number" name="urutan" value="{{ old('urutan', $gallery->urutan) }}" 
-                           class="form-control" min="0">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Urutan</label>
+                    <input type="number" name="urutan" value="{{ old('urutan', $gallery->urutan) }}" min="0"
+                           class="w-full text-sm border border-gray-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-yellow-400">
                 </div>
             </div>
 
-            <!-- Status -->
-            <div class="mb-4">
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" name="aktif" id="aktifCheck" 
-                           {{ old('aktif', $gallery->aktif) ? 'checked' : '' }}>
-                    <label class="form-check-label" for="aktifCheck">Tampilkan di website publik</label>
-                </div>
+            {{-- Status Aktif --}}
+            <div class="flex items-center gap-3">
+                <input type="checkbox" name="aktif" id="aktifCheck"
+                       {{ old('aktif', $gallery->aktif) ? 'checked' : '' }}
+                       class="w-4 h-4 rounded border-gray-300 text-yellow-500 focus:ring-yellow-400">
+                <label for="aktifCheck" class="text-sm text-gray-700 cursor-pointer">
+                    Tampilkan di website publik
+                </label>
             </div>
 
-            <div class="d-flex gap-3 mt-5">
-                <a href="{{ route('admin.gallery.index') }}" class="btn btn-light px-5 py-2">Batal</a>
-                <button type="submit" class="btn-submit">
-                    <i class="fas fa-save me-2"></i> Update Foto
+            {{-- Tombol --}}
+            <div class="flex gap-3 pt-2 border-t border-gray-100">
+                <button type="submit"
+                        class="bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-semibold text-sm px-5 py-2.5 rounded-xl transition">
+                    Update Foto
                 </button>
+                <a href="{{ route('admin.gallery.index') }}"
+                   class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium text-sm px-5 py-2.5 rounded-xl transition">
+                    Batal
+                </a>
             </div>
         </form>
     </div>
 </div>
-@endsection
 
-@push('scripts')
 <script>
-    // Preview foto baru (opsional)
-    document.getElementById('fotoInput').addEventListener('change', function(e) {
+    document.getElementById('fotoInput').addEventListener('change', function (e) {
         if (e.target.files && e.target.files[0]) {
             const reader = new FileReader();
-            reader.onload = function(ev) {
-                const img = document.createElement('img');
-                img.src = ev.target.result;
-                img.style.maxHeight = '200px';
-                img.style.borderRadius = '8px';
-                // Bisa ditampilkan di bawah jika diperlukan
+            reader.onload = function (ev) {
+                document.getElementById('previewImg').src = ev.target.result;
+                document.getElementById('previewWrap').classList.remove('hidden');
+                document.getElementById('uploadArea').classList.add('hidden');
             };
             reader.readAsDataURL(e.target.files[0]);
         }
     });
+
+    function removePreview() {
+        document.getElementById('fotoInput').value = '';
+        document.getElementById('previewWrap').classList.add('hidden');
+        document.getElementById('uploadArea').classList.remove('hidden');
+    }
 </script>
-@endpush
+
+@endsection

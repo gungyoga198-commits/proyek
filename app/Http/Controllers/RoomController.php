@@ -5,23 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Rooms;
 use Illuminate\Http\Request;
 
-// ============================================================
-// PERTEMUAN 11 — RoomController (Resource CRUD)
-// Mengelola data kamar hotel dari admin panel
-//
-// PERTEMUAN 13 — Otorisasi:
-// - Route sudah dilindungi middleware 'role:admin'
-// - authorizeResource() memetakan setiap method ke RoomPolicy
-// ============================================================
-
 class RoomController extends Controller
 {
-    // Catatan Laravel 12: authorizeResource() & middleware() di constructor
-    // sudah dihapus dari framework. Otorisasi ditangani oleh:
-    // 1. Route middleware 'auth'     → wajib login
-    // 2. Route middleware 'role:admin' → wajib role admin (web.php)
-    // 3. @can / Gate::authorize()   → di dalam method & view
-
     // GET /admin/rooms — daftar semua kamar
     public function index()
     {

@@ -4,18 +4,10 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-// ============================================================
-// PERTEMUAN 11 — Migration Tabel Rooms
-// Schema::dropIfExists dulu → aman jika tabel lama sudah ada
-// dengan struktur yang berbeda
-// ============================================================
-
 return new class extends Migration
 {
     public function up(): void
     {
-        // Hapus tabel lama terlebih dahulu jika sudah ada
-        // (aman: tabel lama mungkin punya struktur berbeda)
         Schema::dropIfExists('rooms');
 
         Schema::create('rooms', function (Blueprint $table) {

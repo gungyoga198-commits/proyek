@@ -4,6 +4,6 @@
 
 @section('content')
 
-    <x-gallery />
-    
+    <x-gallery :galleries="$galleries" :kategoris="$kategoris" :kategori="$kategori" />
+
 @endsection

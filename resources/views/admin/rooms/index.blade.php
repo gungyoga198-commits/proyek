@@ -150,17 +150,4 @@
     @endif
 </div>
 
-{{-- Info Relasi Eloquent —  hanya tampil saat pengembangan --}}
-@if(config('app.debug'))
-<div class="mt-6 bg-blue-50 border border-blue-100 rounded-xl p-4 text-xs text-blue-700">
-    <p class="font-semibold mb-1">📚 Pertemuan 11 — Relasi Eloquent yang aktif:</p>
-    <ul class="space-y-0.5 list-disc list-inside text-blue-600">
-        <li><code>Rooms::hasMany(Reservation::class)</code> → satu kamar punya banyak reservasi</li>
-        <li><code>Reservation::belongsTo(Rooms::class)</code> → setiap reservasi milik satu kamar</li>
-        <li><code>withCount('reservations')</code> → menghitung relasi tanpa N+1 query</li>
-        <li><code>Rooms::aktif()->get()</code> → scope hanya kamar is_active = true</li>
-    </ul>
-</div>
-@endif
-
 @endsection

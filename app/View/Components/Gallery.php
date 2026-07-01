@@ -8,7 +8,16 @@ use Illuminate\View\Component;
 
 class Gallery extends Component
 {
-    public function __construct() {}
+    public $galleries;
+    public $kategoris;
+    public $kategori;
+
+    public function __construct($galleries = null, $kategoris = null, $kategori = 'semua')
+    {
+        $this->galleries = $galleries ?? collect();
+        $this->kategoris = $kategoris ?? collect();
+        $this->kategori = $kategori;
+    }
 
     public function render(): View|Closure|string
     {

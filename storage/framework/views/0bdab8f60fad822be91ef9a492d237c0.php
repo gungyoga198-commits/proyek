@@ -152,19 +152,6 @@
     <?php endif; ?>
 </div>
 
-
-<?php if(config('app.debug')): ?>
-<div class="mt-6 bg-blue-50 border border-blue-100 rounded-xl p-4 text-xs text-blue-700">
-    <p class="font-semibold mb-1">📚 Pertemuan 11 — Relasi Eloquent yang aktif:</p>
-    <ul class="space-y-0.5 list-disc list-inside text-blue-600">
-        <li><code>Rooms::hasMany(Reservation::class)</code> → satu kamar punya banyak reservasi</li>
-        <li><code>Reservation::belongsTo(Rooms::class)</code> → setiap reservasi milik satu kamar</li>
-        <li><code>withCount('reservations')</code> → menghitung relasi tanpa N+1 query</li>
-        <li><code>Rooms::aktif()->get()</code> → scope hanya kamar is_active = true</li>
-    </ul>
-</div>
-<?php endif; ?>
-
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('admin.layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\proyek\resources\views/admin/rooms/index.blade.php ENDPATH**/ ?>

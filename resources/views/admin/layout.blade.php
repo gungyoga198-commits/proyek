@@ -92,10 +92,10 @@
             </a>
             @endcan
 
-            <!-- MENU GALLERY YANG BARU DIGABUNGKAN -->
-            <a href="{{ route('admin.gallery.index') }}" class="flex items-center gap-3 px-4 py-3 text-sm hover:bg-gray-800 rounded-lg transition {{ request()->routeIs('admin.gallery*') ? 'bg-gray-800' : '' }}">
-                <i class="fas fa-images w-5"></i>
-                <span>Gallery</span>
+            <a href="{{ route('admin.gallery.index') }}" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm
+               {{ request()->routeIs('admin.gallery*') ? 'bg-yellow-500 text-gray-900 font-semibold shadow-lg' : 'text-gray-300 hover:bg-white/10 hover:text-white' }}">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M14 8h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                Kelola Gallery
             </a>
 
         </nav>

@@ -2,7 +2,12 @@
 
 <!-- HERO BANNER -->
 <section class="relative h-72 flex items-center justify-center overflow-hidden">
-    <img src="/images/gallery2.webp" class="absolute inset-0 w-full h-full object-cover" alt="Gallery Banner">
+    <?php
+        $heroImage = $galleries->first()
+            ? asset('storage/' . $galleries->first()->foto)
+            : asset('images/gallery2.webp');
+    ?>
+    <img src="<?php echo e($heroImage); ?>" class="absolute inset-0 w-full h-full object-cover" alt="Gallery Banner">
     <div class="absolute inset-0 bg-black/60 pointer-events-none"></div>
     <div class="relative text-center text-white z-10">
         <p class="tracking-widest text-xs text-yellow-400 mb-3 uppercase">Our Collection</p>
@@ -19,340 +24,96 @@
     <span class="text-yellow-600 font-medium">Gallery</span>
 </div>
 
-<!-- FILTER TABS -->
+<!-- FILTER TABS (dibuat otomatis dari kategori yang ada di database) -->
+<?php if($galleries->isNotEmpty()): ?>
 <section class="bg-white py-10 px-6">
-    <div class="flex justify-center gap-3 flex-wrap">
-        <button onclick="filterGallery('all')" id="btn-all"
-            class="filter-btn px-6 py-2 text-sm tracking-widest border border-yellow-600 bg-yellow-600 text-white transition">
+    <div class="flex justify-center gap-3 flex-wrap" id="filter-tabs">
+        <button onclick="filterGallery('all', this)"
+            class="filter-btn px-6 py-2 text-sm tracking-widest border border-yellow-600 bg-yellow-600 text-white transition rounded-full">
             ALL
         </button>
-        <button onclick="filterGallery('exterior')" id="btn-exterior"
-            class="filter-btn px-6 py-2 text-sm tracking-widest border border-gray-300 text-gray-500 hover:border-yellow-600 hover:text-yellow-600 transition">
-            EXTERIOR
+        <?php $__currentLoopData = $kategoris; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <button onclick="filterGallery('<?php echo e($k); ?>', this)"
+            class="filter-btn px-6 py-2 text-sm tracking-widest border border-gray-300 text-gray-500 hover:border-yellow-600 hover:text-yellow-600 transition rounded-full">
+            <?php echo e(strtoupper($k)); ?>
+
         </button>
-        <button onclick="filterGallery('pool')" id="btn-pool"
-            class="filter-btn px-6 py-2 text-sm tracking-widest border border-gray-300 text-gray-500 hover:border-yellow-600 hover:text-yellow-600 transition">
-            POOL
-        </button>
-        <button onclick="filterGallery('room')" id="btn-room"
-            class="filter-btn px-6 py-2 text-sm tracking-widest border border-gray-300 text-gray-500 hover:border-yellow-600 hover:text-yellow-600 transition">
-            ROOMS
-        </button>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
 </section>
+<?php endif; ?>
 
 <!-- GALLERY GRID -->
-<section class="bg-gray-50 pb-24 px-6 md:px-16">
-    <div class="max-w-6xl mx-auto columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6" id="gallery-grid">
+<section class="bg-gray-50 pb-24 px-6 md:px-16 <?php echo e($galleries->isEmpty() ? 'pt-16' : ''); ?>">
 
-        <!-- IMAGE 1 -->
-        <div class="gallery-item break-inside-avoid group cursor-pointer"
-             data-category="exterior"
-             onclick="openLightbox('/images/gallery1.jpg', 'Villa Exterior with Pool')">
-            
-            <div class="border-2 border-yellow-500 rounded-lg p-1.5
-                        group-hover:border-yellow-600
-                        transition-colors duration-300 shadow-md">
-                <div class="relative overflow-hidden rounded-md">
-                    <img src="/images/gallery1.jpg"
-                         class="w-full object-cover
-                                group-hover:scale-110
-                                transition-transform duration-700"
-                         alt="Villa Exterior">
-                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40
-                                transition-all duration-300
-                                flex items-center justify-center">
-                        <div class="opacity-0 group-hover:opacity-100
-                                    transition-all duration-300
-                                    text-center text-white">
-                            <p class="text-2xl mb-1">🔍</p>
-                            <p class="text-sm tracking-widest">VIEW</p>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0
-                                bg-gradient-to-t from-black/70 to-transparent p-4
-                                translate-y-full group-hover:translate-y-0
-                                transition-transform duration-300">
-                        <p class="text-white text-sm font-semibold">Villa Exterior</p>
-                        <p class="text-yellow-400 text-xs tracking-wide">Exterior</p>
-                    </div>
-                </div>
-            </div>
+    <?php if($galleries->isEmpty()): ?>
+    
+    <div class="max-w-md mx-auto text-center py-16">
+        <div class="w-20 h-20 mx-auto mb-5 rounded-full bg-yellow-50 flex items-center justify-center">
+            <svg class="w-9 h-9 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M14 8h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
         </div>
-
-        <!-- IMAGE 2 -->
-        <div class="gallery-item break-inside-avoid group cursor-pointer"
-             data-category="pool"
-             onclick="openLightbox('/images/gallery2.webp', 'Private Pool Villa')">
-            <div class="border-2 border-yellow-500 rounded-lg p-1.5
-                        group-hover:border-yellow-600
-                        transition-colors duration-300 shadow-md">
-                <div class="relative overflow-hidden rounded-md">
-                    <img src="/images/gallery2.webp"
-                         class="w-full object-cover
-                                group-hover:scale-110
-                                transition-transform duration-700"
-                         alt="Private Pool">
-                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40
-                                transition-all duration-300
-                                flex items-center justify-center">
-                        <div class="opacity-0 group-hover:opacity-100
-                                    transition-all duration-300
-                                    text-center text-white">
-                            <p class="text-2xl mb-1">🔍</p>
-                            <p class="text-sm tracking-widest">VIEW</p>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0
-                                bg-gradient-to-t from-black/70 to-transparent p-4
-                                translate-y-full group-hover:translate-y-0
-                                transition-transform duration-300">
-                        <p class="text-white text-sm font-semibold">Private Pool Villa</p>
-                        <p class="text-yellow-400 text-xs tracking-wide">Pool</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- IMAGE 3 -->
-        <div class="gallery-item break-inside-avoid group cursor-pointer"
-             data-category="room"
-             onclick="openLightbox('/images/Deluxe.jpg', 'Deluxe Room')">
-            <div class="border-2 border-yellow-500 rounded-lg p-1.5
-                        group-hover:border-yellow-600
-                        transition-colors duration-300 shadow-md">
-                <div class="relative overflow-hidden rounded-md">
-                    <img src="/images/Deluxe.jpg"
-                         class="w-full object-cover
-                                group-hover:scale-110
-                                transition-transform duration-700"
-                         alt="Deluxe Room">
-                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40
-                                transition-all duration-300
-                                flex items-center justify-center">
-                        <div class="opacity-0 group-hover:opacity-100
-                                    transition-all duration-300
-                                    text-center text-white">
-                            <p class="text-2xl mb-1">🔍</p>
-                            <p class="text-sm tracking-widest">VIEW</p>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0
-                                bg-gradient-to-t from-black/70 to-transparent p-4
-                                translate-y-full group-hover:translate-y-0
-                                transition-transform duration-300">
-                        <p class="text-white text-sm font-semibold">Deluxe Room</p>
-                        <p class="text-yellow-400 text-xs tracking-wide">Rooms</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- IMAGE 4 -->
-        <div class="gallery-item break-inside-avoid group cursor-pointer"
-             data-category="room"
-             onclick="openLightbox('/images/Family.jpg', 'Family Room')">
-            <div class="border-2 border-yellow-500 rounded-lg p-1.5
-                        group-hover:border-yellow-600
-                        transition-colors duration-300 shadow-md">
-                <div class="relative overflow-hidden rounded-md">
-                    <img src="/images/Family.jpg"
-                         class="w-full object-cover
-                                group-hover:scale-110
-                                transition-transform duration-700"
-                         alt="Family Room">
-                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40
-                                transition-all duration-300
-                                flex items-center justify-center">
-                        <div class="opacity-0 group-hover:opacity-100
-                                    transition-all duration-300
-                                    text-center text-white">
-                            <p class="text-2xl mb-1">🔍</p>
-                            <p class="text-sm tracking-widest">VIEW</p>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0
-                                bg-gradient-to-t from-black/70 to-transparent p-4
-                                translate-y-full group-hover:translate-y-0
-                                transition-transform duration-300">
-                        <p class="text-white text-sm font-semibold">Family Room</p>
-                        <p class="text-yellow-400 text-xs tracking-wide">Rooms</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- IMAGE 5 -->
-        <div class="gallery-item break-inside-avoid group cursor-pointer"
-             data-category="room"
-             onclick="openLightbox('/images/Presidential.jpg', 'Presidential Suite')">
-            <div class="border-2 border-yellow-500 rounded-lg p-1.5
-                        group-hover:border-yellow-600
-                        transition-colors duration-300 shadow-md">
-                <div class="relative overflow-hidden rounded-md">
-                    <img src="/images/Presidential.jpg"
-                         class="w-full object-cover
-                                group-hover:scale-110
-                                transition-transform duration-700"
-                         alt="Presidential Suite">
-                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40
-                                transition-all duration-300
-                                flex items-center justify-center">
-                        <div class="opacity-0 group-hover:opacity-100
-                                    transition-all duration-300
-                                    text-center text-white">
-                            <p class="text-2xl mb-1">🔍</p>
-                            <p class="text-sm tracking-widest">VIEW</p>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0
-                                bg-gradient-to-t from-black/70 to-transparent p-4
-                                translate-y-full group-hover:translate-y-0
-                                transition-transform duration-300">
-                        <p class="text-white text-sm font-semibold">Presidential Suite</p>
-                        <p class="text-yellow-400 text-xs tracking-wide">Rooms</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- IMAGE 6 -->
-        <div class="gallery-item break-inside-avoid group cursor-pointer"
-             data-category="exterior"
-             onclick="openLightbox('/images/OGAG.jpg', 'Hotel Exterior')">
-            <div class="border-2 border-yellow-500 rounded-lg p-1.5
-                        group-hover:border-yellow-600
-                        transition-colors duration-300 shadow-md">
-                <div class="relative overflow-hidden rounded-md">
-                    <img src="/images/OGAG.jpg"
-                         class="w-full object-cover
-                                group-hover:scale-110
-                                transition-transform duration-700"
-                         alt="Hotel Exterior">
-                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40
-                                transition-all duration-300
-                                flex items-center justify-center">
-                        <div class="opacity-0 group-hover:opacity-100
-                                    transition-all duration-300
-                                    text-center text-white">
-                            <p class="text-2xl mb-1">🔍</p>
-                            <p class="text-sm tracking-widest">VIEW</p>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0
-                                bg-gradient-to-t from-black/70 to-transparent p-4
-                                translate-y-full group-hover:translate-y-0
-                                transition-transform duration-300">
-                        <p class="text-white text-sm font-semibold">Hotel Exterior</p>
-                        <p class="text-yellow-400 text-xs tracking-wide">Exterior</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- IMAGE 7 -->
-        <div class="gallery-item break-inside-avoid group cursor-pointer"
-             data-category="pool"
-             onclick="openLightbox('/images/gallery2.webp', 'Private Pool')">
-            <div class="border-2 border-yellow-500 rounded-lg p-1.5
-                        group-hover:border-yellow-600
-                        transition-colors duration-300 shadow-md">
-                <div class="relative overflow-hidden rounded-md">
-                    <img src="/images/gallery2.webp"
-                         class="w-full object-cover
-                                group-hover:scale-110
-                                transition-transform duration-700"
-                         alt="Private Pool">
-                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40
-                                transition-all duration-300
-                                flex items-center justify-center">
-                        <div class="opacity-0 group-hover:opacity-100
-                                    transition-all duration-300
-                                    text-center text-white">
-                            <p class="text-2xl mb-1">🔍</p>
-                            <p class="text-sm tracking-widest">VIEW</p>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0
-                                bg-gradient-to-t from-black/70 to-transparent p-4
-                                translate-y-full group-hover:translate-y-0
-                                transition-transform duration-300">
-                        <p class="text-white text-sm font-semibold">Private Pool</p>
-                        <p class="text-yellow-400 text-xs tracking-wide">Pool</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- IMAGE 8 -->
-        <div class="gallery-item break-inside-avoid group cursor-pointer"
-             data-category="pool"
-             onclick="openLightbox('/images/gallery1.jpg', 'Pool Area')">
-            <div class="border-2 border-yellow-500 rounded-lg p-1.5
-                        group-hover:border-yellow-600
-                        transition-colors duration-300 shadow-md">
-                <div class="relative overflow-hidden rounded-md">
-                    <img src="/images/gallery1.jpg"
-                         class="w-full object-cover
-                                group-hover:scale-110
-                                transition-transform duration-700"
-                         alt="Pool Area">
-                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40
-                                transition-all duration-300
-                                flex items-center justify-center">
-                        <div class="opacity-0 group-hover:opacity-100
-                                    transition-all duration-300
-                                    text-center text-white">
-                            <p class="text-2xl mb-1">🔍</p>
-                            <p class="text-sm tracking-widest">VIEW</p>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0
-                                bg-gradient-to-t from-black/70 to-transparent p-4
-                                translate-y-full group-hover:translate-y-0
-                                transition-transform duration-300">
-                        <p class="text-white text-sm font-semibold">Pool Area</p>
-                        <p class="text-yellow-400 text-xs tracking-wide">Pool</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- IMAGE 9 -->
-        <div class="gallery-item break-inside-avoid group cursor-pointer"
-             data-category="exterior"
-             onclick="openLightbox('/images/gallery1.jpg', 'Villa with Pool')">
-            <div class="border-2 border-yellow-500 rounded-lg p-1.5
-                        group-hover:border-yellow-600
-                        transition-colors duration-300 shadow-md">
-                <div class="relative overflow-hidden rounded-md">
-                    <img src="/images/gallery1.jpg"
-                         class="w-full object-cover
-                                group-hover:scale-110
-                                transition-transform duration-700 brightness-90"
-                         alt="Villa with Pool">
-                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40
-                                transition-all duration-300
-                                flex items-center justify-center">
-                        <div class="opacity-0 group-hover:opacity-100
-                                    transition-all duration-300
-                                    text-center text-white">
-                            <p class="text-2xl mb-1">🔍</p>
-                            <p class="text-sm tracking-widest">VIEW</p>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0
-                                bg-gradient-to-t from-black/70 to-transparent p-4
-                                translate-y-full group-hover:translate-y-0
-                                transition-transform duration-300">
-                        <p class="text-white text-sm font-semibold">Villa with Pool</p>
-                        <p class="text-yellow-400 text-xs tracking-wide">Exterior</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <h3 class="text-lg font-semibold text-gray-700 mb-2">Galeri Belum Tersedia</h3>
+        <p class="text-sm text-gray-400">Foto-foto terbaru akan segera kami tambahkan di sini.</p>
     </div>
+    <?php else: ?>
+
+    <div class="max-w-6xl mx-auto columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6" id="gallery-grid">
+        <?php $__currentLoopData = $galleries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <div class="gallery-item break-inside-avoid group cursor-pointer opacity-0"
+             style="animation: fadeInUp 0.6s ease forwards; animation-delay: <?php echo e(min($i * 0.08, 0.8)); ?>s;"
+             data-category="<?php echo e($item->kategori); ?>"
+             onclick="openLightbox('<?php echo e(asset('storage/' . $item->foto)); ?>', '<?php echo e(addslashes($item->judul)); ?>')">
+
+            <div class="relative border-2 border-yellow-500/70 rounded-xl p-1.5
+                        group-hover:border-yellow-500 group-hover:shadow-xl group-hover:-translate-y-1
+                        transition-all duration-300 shadow-md bg-white">
+                <div class="relative overflow-hidden rounded-lg">
+                    <img src="<?php echo e(asset('storage/' . $item->foto)); ?>"
+                         loading="lazy"
+                         class="w-full object-cover group-hover:scale-110 transition-transform duration-700"
+                         alt="<?php echo e($item->judul); ?>">
+
+                    
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300
+                                flex items-center justify-center">
+                        <div class="opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100
+                                    transition-all duration-300 text-center text-white">
+                            <svg class="w-7 h-7 mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"/>
+                            </svg>
+                            <p class="text-xs tracking-widest">LIHAT</p>
+                        </div>
+                    </div>
+
+                    
+                    <span class="absolute top-3 left-3 bg-black/60 text-yellow-400 text-[10px] font-semibold
+                                 tracking-wider uppercase px-2.5 py-1 rounded-full backdrop-blur-sm">
+                        <?php echo e($item->kategori); ?>
+
+                    </span>
+
+                    
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4
+                                translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <p class="text-white text-sm font-semibold leading-tight"><?php echo e($item->judul); ?></p>
+                        <?php if($item->deskripsi): ?>
+                        <p class="text-gray-300 text-xs mt-0.5 line-clamp-1"><?php echo e($item->deskripsi); ?></p>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    </div>
+
+    
+    <p id="no-result" class="hidden text-center text-gray-400 text-sm mt-10">
+        Tidak ada foto untuk kategori ini.
+    </p>
+
+    <?php endif; ?>
 </section>
 
 <!-- LIGHTBOX -->
@@ -365,27 +126,32 @@
 </div>
 
 <script>
-    function filterGallery(category) {
+    function filterGallery(category, btn) {
         const items = document.querySelectorAll('.gallery-item');
         const buttons = document.querySelectorAll('.filter-btn');
+        const noResult = document.getElementById('no-result');
+        let visibleCount = 0;
 
-        buttons.forEach(btn => {
-            btn.classList.remove('bg-yellow-600', 'text-white', 'border-yellow-600');
-            btn.classList.add('border-gray-300', 'text-gray-500');
+        buttons.forEach(b => {
+            b.classList.remove('bg-yellow-600', 'text-white', 'border-yellow-600');
+            b.classList.add('border-gray-300', 'text-gray-500');
         });
-
-        const activeBtn = document.getElementById('btn-' + category);
-        activeBtn.classList.add('bg-yellow-600', 'text-white', 'border-yellow-600');
-        activeBtn.classList.remove('border-gray-300', 'text-gray-500');
+        btn.classList.add('bg-yellow-600', 'text-white', 'border-yellow-600');
+        btn.classList.remove('border-gray-300', 'text-gray-500');
 
         items.forEach(item => {
             if (category === 'all' || item.dataset.category === category) {
                 item.style.display = 'block';
                 item.style.animation = 'fadeIn 0.4s ease';
+                visibleCount++;
             } else {
                 item.style.display = 'none';
             }
         });
+
+        if (noResult) {
+            noResult.classList.toggle('hidden', visibleCount > 0);
+        }
     }
 
     function openLightbox(src, caption) {
@@ -404,7 +170,7 @@
         document.body.style.overflow = '';
     }
 
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') closeLightbox();
     });
 </script>
@@ -412,6 +178,10 @@
 <style>
     @keyframes fadeIn {
         from { opacity: 0; transform: translateY(10px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(24px); }
         to   { opacity: 1; transform: translateY(0); }
     }
 </style><?php /**PATH C:\laragon\www\proyek\resources\views/components/gallery.blade.php ENDPATH**/ ?>
